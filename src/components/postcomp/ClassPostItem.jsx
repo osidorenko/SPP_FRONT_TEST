@@ -42,6 +42,7 @@ class ClassPostItem extends React.Component {
             counter: 0,
             comment_count: 2,
             comments: [],
+            comments_all: this.props.post.comments,
             isHaveNextComments: true,
             isPicturePost: true,
             isMusicPost: true
@@ -66,7 +67,7 @@ class ClassPostItem extends React.Component {
                 break
 
             }
-            let comment = this.props.post.comments[i]
+            let comment = this.state.comments_all[i]
             comments1.push(comment)
             i++
         }
@@ -75,6 +76,24 @@ class ClassPostItem extends React.Component {
     }
 
     componentDidMount() {
+        {
+            this.state.comments_all.sort(function (a, b) {
+                    if (a.date > b.date) {
+                        return 1
+                    }
+                    if (a.date < b.date) {
+                        return -1
+                    }
+                    if (a.time > b.time) {
+                        return 1
+                    }
+                    if (a.time < b.time) {
+                        return -1;
+                    }
+                    return 0
+                }
+            )
+        }
         this.init()
         let post = this.props.post
         if (post.picture.name === '') {

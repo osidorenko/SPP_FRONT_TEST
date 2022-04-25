@@ -126,12 +126,11 @@ input[type=range] {
     border-radius: 8px;
     top: 83%;
     display: flex;
-    max-width: 800px;
+    width: 800px;
     padding: 10px;
     height: 100px;
     background: white;
     border: 2px solid black;
-
     color: black;
 }
 
@@ -140,35 +139,19 @@ input[type=range] {
 
 }
 
-.artwork {
-    border-radius: 120px;
-    display: block;
-    margin: auto;
-    height: 50px;
-    width: 50px;
-}
-
 .track-info {
     text-align: center;
     z-index: 1;
     position: relative;
-    margin-left: 60px;
-    margin-top: +10px;
+    margin-left: -10px;
+    margin-top: 0px;
 
 }
-.empty{
+
+.empty {
     height: 110px;
 }
 
-.title {
-    font-weight: 700;
-    margin-bottom: 4px;
-}
-
-.artist {
-    font-weight: 300;
-    margin-top: 0;
-}
 
 .audio-controls {
     display: flex;
@@ -284,7 +267,7 @@ input[type=range] {
     top: 50%;
     left: 50%;
     margin-top: +13px;
-    margin-left: +320px;
+    margin-left: +250px;
 }
 
 .audio-control-next {
@@ -313,7 +296,41 @@ input[type=range] {
 .progress_div {
     top: 50%;
     left: 50%;
-    width: 600px;
+    width: 500px;
     margin-top: +60px;
     margin-left: +5px;
+}
+
+.title {
+    margin-top: +15px;
+    margin-left: +5px;
+    display: block;
+}
+
+.artist {
+    font-weight: 300;
+    display: block;
+    margin-top: +5px;
+    margin-left: +5px;
+}
+
+.artwork {
+    border-radius: 120px;
+    display: block;
+    margin: auto;
+    height: 50px;
+    width: 50px;
+}
+
+.audio-info {
+    display: flex;
+
+}
+
+.audio-player-control {
+    display: flex;
+    position: fixed;
+
+    right: 20%;
+
 }

@@ -1,4 +1,8 @@
 import React, {useState} from "react";
+import {observer, inject, Provider} from "mobx-react"
+import {observable} from "mobx";
+
+
 import Counter from "./components/postcomp/Counter";
 
 
@@ -12,6 +16,8 @@ import ClassAuthorizationItem from "./components/ClassAuthorizationItem";
 import UserInfoItem from "./components/usercomp/UserInfoItem";
 import ClassMusicItem from "./components/usercomp/ClassMusicItem";
 import MusicListItem from "./components/usercomp/MusicListItem";
+import postsStore from "./store/PostsStore"
+import PostsPage from "./components/PostsPage";
 
 let pCurrent = 0
 
@@ -88,11 +94,11 @@ function App() {
         }
     ])
 
-    const songs_data = [{
+    const songs = [{
         id: 14,
         user: {
             id: 2,
-            name: "Nirvana",
+            name: "ATL",
             picture: {
                 id: 1,
                 name: "defAvatar1.png"
@@ -102,6 +108,29 @@ function App() {
         picture: {
             id: 1,
             name: "defAvatar1.png"
+        },
+        song: {
+            id: 1,
+            name: "Гори ясно",
+            author: "ATL",
+            lasting: 2.5,
+            raiting: 3.5,
+            gengre: "Rock"
+        }
+    }, {
+        id: 14,
+        user: {
+            id: 2,
+            name: "Nirvana",
+            picture: {
+                id: 1,
+                name: "content.png"
+            }
+        },
+        songName: "NirvanaSINW.mp3",
+        picture: {
+            id: 1,
+            name: "content.png"
         },
         song: {
             id: 1,
@@ -121,30 +150,7 @@ function App() {
                 name: "defAvatar1.png"
             }
         },
-        songName: "ATL.mp3",
-        picture: {
-            id: 1,
-            name: "defAvatar1.png"
-        },
-        song: {
-            id: 1,
-            name: "Something in the way...",
-            author: "Nirvana",
-            lasting: 2.5,
-            raiting: 3.5,
-            gengre: "Rock"
-        }
-    }, {
-        id: 14,
-        user: {
-            id: 2,
-            name: "Nirvana",
-            picture: {
-                id: 1,
-                name: "defAvatar1.png"
-            }
-        },
-        songName: "ATL.mp3",
+        songName: "NirvanaSINW.mp3",
         picture: {
             id: 1,
             name: "defAvatar1.png"
@@ -159,9 +165,33 @@ function App() {
         }
     }]
 
-//<PlayerItemPost song={song_data.song} song_data={song_data}/>
-    //
-    //
+    const [songs_data, setSongs_data] = useState([
+        /*{
+            id: 14,
+            user: {
+                id: 2,
+                name: "Nirvana",
+                picture: {
+                    id: 1,
+                    name: "content.png"
+                }
+            },
+            songName: "NirvanaSINW.mp3",
+            picture: {
+                id: 1,
+                name: "content.png"
+            },
+            song: {
+                id: 1,
+                name: "Something in the way...",
+                author: "Nirvana",
+                lasting: 2.5,
+                raiting: 3.5,
+                gengre: "Rock"
+            }
+        }*/
+    ])
+
     const user = {
         id: 2,
         name: "Nirvana",
@@ -171,17 +201,33 @@ function App() {
         }
     }
 
+    const createMusic = (newMusic) => {
+        setSongs_data([])
+        let songs = []
+        newMusic.map((song) =>
+            songs.push(song)
+        )
+        setSongs_data(songs)
+    }
+    const stores = {
+        postsStore
+    }
+
     return (
         <div className="App">
-            <HeadItem/>
+            <Provider {...stores} >
+                <HeadItem/>
+                <PostsPage />
+            </Provider>
+
             {/*<ClassPostsPage/>*/}
-            <UserInfoItem user={user}/>
+            {/*<UserInfoItem user={user}/>
             <div className="post">
-                <MusicListItem songs_data={songs_data}/>
+                <MusicListItem create={createMusic} songs_data={songs}/>
             </div>
-            <div><PlayerItem song_data={songs_data[0]} song={songs_data[0].song}/></div>
+            <div><PlayerItem songs_data={songs_data} /></div>
             <ClassPostsPage/>
-            <div className="empty"/>
+            <div className="empty"/>*/}
         </div>
     )
 

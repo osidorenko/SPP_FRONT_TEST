@@ -3,6 +3,7 @@ import PlayerItemPost from "../player/PlayerItemPost";
 import def from "../png/content.png"
 import play from "../png/play.png"
 import pause from "../png/pause1.png"
+import {observer} from "mobx-react";
 
 
 class ClassMusicItem extends React.Component {
@@ -15,15 +16,26 @@ class ClassMusicItem extends React.Component {
             isPlay: false
         }
         this.changePlay = this.changePlay.bind(this)
+        this.addNewMusic = this.addNewMusic.bind(this)
     }
 
     componentDidMount() {
-        this.state.isPhoto = false;
+        this.state.isPhoto = true;
+    }
 
+    addNewMusic(e) {
+        e.preventDefault()
+        const newMusic = []
+        newMusic.push(this.props.song_data)
+        this.props.create(newMusic)
     }
 
     changePlay() {
         //this.setState()
+        //this.addNewMusic()
+        const newMusic = []
+        newMusic.push(this.props.song_data)
+        this.props.create(newMusic)
         this.setState({isPlay: !this.state.isPlay})
     }
 
@@ -31,9 +43,7 @@ class ClassMusicItem extends React.Component {
     render() {
         return (
             <div className="music_item">
-                <section>
 
-                </section>
                 <div className="music_item__play">
                     {this.state.isPlay ? (
                         <img onClick={event => {
@@ -58,9 +68,12 @@ class ClassMusicItem extends React.Component {
                 <div><h3 className="music_item_name">
                     {this.props.song_data.song.author} - {this.props.song_data.song.name}
                 </h3>
-                    <h4 className="music_item_lasting">{this.props.song_data.song.lasting}</h4>
+                    <h4 className="music_item_lasting">
+                        {((this.props.song_data.song.lasting | 0) / 60) | 0}:{
+                        ((this.props.song_data.song.lasting | 0) % 60) > 9 ? ((this.props.song_data.song.lasting | 0) % 60) : ("0" + (this.props.song_data.song.lasting | 0) % 60)
+                    }
+                    </h4>
                 </div>
-
             </div>
         )
     }

@@ -1,19 +1,22 @@
 import React from "react";
-import HeadItem from "./postcomp/HeadItem";
+
 import PostList from "./postcomp/PostList";
 
+//notused
 class ClassPostsPage extends React.Component {
 
     constructor(props) {
         super(props);
-        this.state = {
+
+        //makeClassComponentObserver()
+        /*this.state = {
             posts: [],
             pCurrent: 0
-        }
-        this.ajaxGetComments = this.ajaxGetComments.bind(this);
+        }*/
+        /*this.ajaxGetComments = this.ajaxGetComments.bind(this);*/
     }
 
-    ajaxGetComments() {
+    /*ajaxGetComments() {
         const request = new XMLHttpRequest();
         request.open("GET", "http://localhost:8100/posts/" + this.state.pCurrent, true);
         request.onload = () => {
@@ -37,23 +40,22 @@ class ClassPostsPage extends React.Component {
         }
         //request.setRequestHeader("Content-Type", "application/json; charset=utf-8");
         request.send(null)
-
-    }
+    }*/
 
     componentDidMount() {
-        this.ajaxGetComments()
+        //this.ajaxGetComments()
     }
 
-    setPCurrent(i) {
-        this.state.pCurrent = i
-    }
+    /* setPCurrent(i) {
+         this.state.pCurrent = i
+     }*/
 
 
     render() {
         return (
             <div>
-                <PostList posts={this.state.posts} title={"1.SHIT POSTS LIST"}/>
-                <button onClick={this.ajaxGetComments}>doRequest</button>
+                <PostList posts={{/*postsStore.prototype.posts*/}} title={"1.SHIT POSTS LIST"}/>
+                <button onClick={{/*postsStore.prototype.getNextPosts*/}}>doRequest</button>
             </div>
         )
     }

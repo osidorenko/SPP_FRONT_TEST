@@ -1,15 +1,16 @@
 import React, {useState} from "react";
+import postsStore from "../store/PostsStore"
+import {observer} from "mobx-react-lite";
 
-const CommentEditor = ({user, props}) => {
+const CommentEditor = observer(({user, props}) => {
 
     const [text, setText] = useState('')
 
     function sendMessage() {
-        if (alert(text === '')) {
+        if ((text === '')) {
         } else {
             var post_id = props.post.id
             const xhr = new XMLHttpRequest();
-
             const sendData = {
                 id: 0,
                 post: {
@@ -23,13 +24,14 @@ const CommentEditor = ({user, props}) => {
                 message: text,
                 author: "none"
             }
+
             xhr.open("POST", "http://localhost:8100/comments");
             xhr.setRequestHeader("Content-Type", "application/json")
             xhr.onload = () => {
                 if (xhr.status == 200) {
                     console.log("sended message")
-                    props.post.comments.push(sendData)
-
+                    //props.post.comments.push(sendData)
+                    postsStore.addNewComment(post_id, sendData)
                     //console.log(xhr.responseText);
                 } else {
                     //console.log("Server response: ", xhr.statusText);
@@ -39,6 +41,7 @@ const CommentEditor = ({user, props}) => {
             xhr.send(JSON.stringify(sendData));
         }
         setText('')
+
     }
 
     return (
@@ -53,6 +56,6 @@ const CommentEditor = ({user, props}) => {
             <button onClick={sendMessage}>SEND</button>
         </div>
     );
-}
+})
 
 export default CommentEditor
