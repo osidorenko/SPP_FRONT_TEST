@@ -1,0 +1,319 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+#root {
+    display: flex;
+    justify-content: center;
+    background: ghostwhite;
+}
+
+.App {
+
+    width: 800px;
+}
+
+
+.post {
+    display: flex;
+    padding: 15px;
+    border: 2px solid black;
+    margin-top: 15px;
+    justify-content: space-between;
+    align-items: center;
+    background: ghostwhite;
+    border-radius: 15px;
+    box-shadow: 0 24px 24px rgba(0, 0, 0, 0.2);
+
+}
+
+.post__content {
+
+    width: 770px;
+    padding: 15px;
+    border: 2px solid black;
+    margin-top: -5px;
+    justify-content: space-between;
+    align-items: center;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 24px 24px rgba(0, 0, 0, 0.2);
+}
+
+.comment {
+    display: flex;
+    padding: 15px;
+    border: 2px solid grey;
+    margin-top: 15px;
+    border-radius: 10px;
+    justify-content: space-between;
+    align-items: center;
+    background: white;
+    box-shadow: 0 12px 12px rgba(0, 0, 0, 0.2);
+}
+
+.header_main {
+    display: flex;
+    padding: 15px;
+    border: 1px solid black;
+    margin-top: 0px;
+    justify-content: space-between;
+    align-items: center;
+    background: white;
+
+}
+
+.player_button {
+    background: white;
+}
+
+.comment_editor {
+    display: flex;
+    padding: 15px;
+    border: 2px solid grey;
+    margin-top: 15px;
+    box-shadow: 0 12px 12px rgba(0, 0, 0, 0.2);
+    align-items: center;
+    background: white;
+}
+
+.player_main {
+
+    padding: 15px;
+}
+
+.user_comment {
+    display: flex;
+    align-items: center;
+    background: white;
+}
+
+
+ul.hr {
+    margin: 0; /* Обнуляем значение отступов */
+    padding: 4px; /* Значение полей */
+}
+
+ul.hr li {
+    display: inline; /* Отображать как строчный элемент */
+    margin-right: 5px; /* Отступ слева */
+    padding: 3px; /* Поля вокруг текста */
+
+}
+
+.li_user_name {
+
+    vertical-align: central;
+
+}
+
+input[type=range] {
+    height: 5px;
+    -webkit-appearance: none;
+    width: 100%;
+    margin-bottom: 10px;
+    border-radius: 8px;
+    background: #807f7f;
+    transition: background 0.2s ease;
+    cursor: pointer;
+}
+
+.audio-player {
+
+    position: fixed;
+    border-radius: 8px;
+    top: 83%;
+    display: flex;
+    max-width: 800px;
+    padding: 10px;
+    height: 100px;
+    background: white;
+    border: 2px solid black;
+
+    color: black;
+}
+
+.posts_button {
+
+
+}
+
+.artwork {
+    border-radius: 120px;
+    display: block;
+    margin: auto;
+    height: 50px;
+    width: 50px;
+}
+
+.track-info {
+    text-align: center;
+    z-index: 1;
+    position: relative;
+    margin-left: 60px;
+    margin-top: +10px;
+
+}
+.empty{
+    height: 110px;
+}
+
+.title {
+    font-weight: 700;
+    margin-bottom: 4px;
+}
+
+.artist {
+    font-weight: 300;
+    margin-top: 0;
+}
+
+.audio-controls {
+    display: flex;
+    justify-content: space-between;
+    width: 75%;
+    margin: 0 auto 15px;
+}
+
+.audio-controls .prev svg,
+.audio-controls .next svg {
+    width: 35px;
+    height: 35px;
+}
+
+.audio-controls .play svg,
+.audio-controls .pause svg {
+    height: 40px;
+    width: 40px;
+}
+
+.audio-controls path {
+    fill: white;
+}
+
+
+.authorization {
+    align-content: center;
+    padding: 15px;
+    border: 2px solid black;
+    margin-top: 15px;
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 24px 24px rgba(0, 0, 0, 0.2);
+}
+
+.user__info {
+    height: 250px;
+    align-content: center;
+    padding: 15px;
+    border: 2px solid black;
+    margin-top: 15px;
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 24px 24px rgba(0, 0, 0, 0.2);
+}
+
+.user__info__content {
+    top: 50%;
+    left: 50%;
+    margin-top: -150px;
+    margin-left: +210px;
+
+}
+
+.music_item:hover {
+    height: 60px;
+    align-content: center;
+    padding: 15px;
+    border: 2px solid black;
+    margin-top: 15px;
+    background: #d7d7d7;
+    border-radius: 5px;
+    display: flex;
+}
+
+.music_item {
+    height: 60px;
+    align-content: center;
+    padding: 15px;
+    border: 2px solid black;
+    margin-top: 15px;
+    background: white;
+    border-radius: 5px;
+    display: flex;
+}
+
+.music_item_img {
+    top: 50%;
+    left: 50%;
+    margin-top: -7px;
+    margin-left: +20px;
+}
+
+.music_item_name {
+    top: 50%;
+    left: 50%;
+    margin-top: +3px;
+    margin-left: +30px;
+}
+
+.music_item_lasting {
+    top: 50%;
+    left: 50%;
+    margin-top: -20px;
+    margin-left: +600px;
+}
+
+.music_item__play {
+    top: 50%;
+    left: 50%;
+    margin-top: +5px;
+    margin-left: -5px;
+}
+
+.audio-control-pl_ps {
+    top: 50%;
+    left: 50%;
+    margin-top: 0px;
+    margin-left: +10px;
+}
+
+.audio-control-prev {
+    top: 50%;
+    left: 50%;
+    margin-top: +13px;
+    margin-left: +320px;
+}
+
+.audio-control-next {
+    top: 50%;
+    left: 50%;
+    margin-top: +13px;
+    margin-left: +10px;
+}
+
+.audio-total {
+    color: grey;
+    top: 50%;
+    left: 50%;
+    margin-top: +56px;
+    margin-left: +5px;
+}
+
+.audio-current {
+    color: grey;
+    top: 50%;
+    left: 50%;
+    margin-top: +56px;
+    margin-left: -300px;
+}
+
+.progress_div {
+    top: 50%;
+    left: 50%;
+    width: 600px;
+    margin-top: +60px;
+    margin-left: +5px;
+}
