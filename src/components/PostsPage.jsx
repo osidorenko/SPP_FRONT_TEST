@@ -1,7 +1,7 @@
 import React from "react";
 import PostList from "./postcomp/PostList";
 import postsStore from "../store/PostsStore";
-import {observer} from "mobx-react-lite";
+import {observer} from "mobx-react";
 
 
 const PostsPage = observer(() => {

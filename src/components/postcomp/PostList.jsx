@@ -1,18 +1,17 @@
 import React from 'react';
 import PostItem from "./PostItem";
 import ClassPostItem from "./ClassPostItem";
-import {observer} from "mobx-react-lite";
+import {inject, observer} from "mobx-react";
 
-const PostList = observer(({posts, title}) => {
+const PostList = inject('postsStore')(observer(({postsStore, title}) => {
     return (
         <div>
-
             {
-                posts.map((post) =>
+                postsStore.posts.map((post) =>
                     <ClassPostItem post={post} key={post.id}/>
                 )}
         </div>
     );
-});
+}));
 
 export default PostList;

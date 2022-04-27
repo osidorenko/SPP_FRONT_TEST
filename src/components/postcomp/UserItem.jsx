@@ -35,12 +35,15 @@ const UserItem = ({user}) => {
         marginTop: '-5px',
         marginLeft: '-5px'
     }
+
     return (
         <div className="user_comment">
             <ul className="hr">
                 <li>
-                    <a href="https://vk.com/feed"><img src={"http://localhost:8100//files/photo/" + user.picture.name}
-                                                       alt={avatar} width={50} height={50}/></a></li>
+                    { user.picture !== undefined ?
+                    <a href="https://vk.com/feed">
+                        <img src={"http://localhost:8100/files/photo/" + user.picture.name}
+                                                       alt={avatar} width={50} height={50}/></a> : 'No?'}</li>
             </ul>
             <h3 style={nameStyle}> {user.name}</h3>
         </div>

@@ -18,6 +18,8 @@ import ClassMusicItem from "./components/usercomp/ClassMusicItem";
 import MusicListItem from "./components/usercomp/MusicListItem";
 import postsStore from "./store/PostsStore"
 import PostsPage from "./components/PostsPage";
+import PlayerItemCOPY from "./components/player/PlayerItemCOPY";
+import PostsEditor from "./components/PostsEditor";
 
 let pCurrent = 0
 
@@ -133,7 +135,7 @@ function App() {
             name: "content.png"
         },
         song: {
-            id: 1,
+            id: 2,
             name: "Something in the way...",
             author: "Nirvana",
             lasting: 2.5,
@@ -156,7 +158,7 @@ function App() {
             name: "defAvatar1.png"
         },
         song: {
-            id: 1,
+            id: 3,
             name: "Something in the way...",
             author: "Nirvana",
             lasting: 2.5,
@@ -209,22 +211,23 @@ function App() {
         )
         setSongs_data(songs)
     }
-    const stores = {
-        postsStore
-    }
 
     return (
         <div className="App">
-            <Provider {...stores} >
-                <HeadItem/>
-                <PostsPage />
-            </Provider>
+            <HeadItem/>
 
-            {/*<ClassPostsPage/>*/}
-            {/*<UserInfoItem user={user}/>
+            <PostsEditor/>
+            {/*<PostsPage/>*/}
+
+            {/*
             <div className="post">
                 <MusicListItem create={createMusic} songs_data={songs}/>
             </div>
+            <PlayerItem songs_data={songs_data}/>*/}
+            <div className="empty"/>
+
+            {/*<ClassPostsPage/>*/}
+            {/*<UserInfoItem user={user}/>
             <div><PlayerItem songs_data={songs_data} /></div>
             <ClassPostsPage/>
             <div className="empty"/>*/}

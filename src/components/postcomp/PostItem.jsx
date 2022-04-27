@@ -74,7 +74,7 @@ const PostItem = (props) => {
                     <h3>
                         {props.post.message}
                     </h3>
-                    <img src={"http://localhost:8100//files/photo/" + props.post.picture.name}
+                    <img src={"http://localhost:8100/files/photo/" + props.post.picture.name}
                          width={500}
                          height={500} alt={content}/>
 

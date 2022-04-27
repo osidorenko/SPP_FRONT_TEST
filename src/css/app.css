@@ -330,7 +330,18 @@ input[type=range] {
 .audio-player-control {
     display: flex;
     position: fixed;
-
     right: 20%;
+}
 
+
+.post_editor_form {
+    height: 500px;
+    width: 800px;
+    align-content: center;
+    padding: 15px;
+    border: 2px solid black;
+    margin-top: 15px;
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 24px 24px rgba(0, 0, 0, 0.2);
 }

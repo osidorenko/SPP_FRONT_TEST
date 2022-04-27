@@ -1,15 +1,15 @@
 import React, {useState} from "react";
 import postsStore from "../store/PostsStore"
-import {observer} from "mobx-react-lite";
+import {inject, observer} from "mobx-react";
+import defAvater from "./png/defAvatar.png"
 
-const CommentEditor = observer(({user, props}) => {
-
-    const [text, setText] = useState('')
-
-    function sendMessage() {
+const CommentEditor = inject('postsStore', 'user')(observer(({postsStore, user, id}) => {
+    const sendMessage = () => {
+        const text = postsStore.text;
         if ((text === '')) {
         } else {
-            var post_id = props.post.id
+            var post_id = id
+            var date = new Date()
             const xhr = new XMLHttpRequest();
             const sendData = {
                 id: 0,
@@ -17,7 +17,9 @@ const CommentEditor = observer(({user, props}) => {
                     id: post_id
                 },
                 user: {
-                    id: user.id
+                    id: user.id,
+                    name: user.name,
+                    picture: user.picture
                 },
                 date: null,
                 time: null,
@@ -31,31 +33,33 @@ const CommentEditor = observer(({user, props}) => {
                 if (xhr.status == 200) {
                     console.log("sended message")
                     //props.post.comments.push(sendData)
-                    postsStore.addNewComment(post_id, sendData)
+                    //postsStore.addNewComment(post_id, sendData)
                     //console.log(xhr.responseText);
                 } else {
                     //console.log("Server response: ", xhr.statusText);
                 }
             };
             console.log(sendData)
-            xhr.send(JSON.stringify(sendData));
-        }
-        setText('')
 
+            xhr.send(JSON.stringify(sendData));
+            sendData.date = date.getFullYear() + "-" + date.getUTCMonth() + "-" + date.getUTCDate();
+            sendData.time = date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
+            postsStore.addNewComment(post_id, sendData)
+        }
     }
 
     return (
         <div className="comment_editor">
             <strong>
-                <img src={"http://localhost:8100//files/photo/" + user.picture.name}
+                <img src={"http://localhost:8100/files/photo/" + user.picture.name}
                      width={40} height={40}/>
             </strong>
             <input
                 type="text" size="80"
-                value={text} onChange={event => setText(event.target.value)}/>
+                value={postsStore.text} onChange={event => postsStore.setText(event.target.value)}/>
             <button onClick={sendMessage}>SEND</button>
         </div>
     );
-})
+}))
 
 export default CommentEditor

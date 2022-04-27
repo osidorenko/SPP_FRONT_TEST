@@ -7,6 +7,9 @@ import CommentEditor from "../CommentEditor";
 import HeadItem from "./HeadItem";
 import PlayerItemPost from "../player/PlayerItemPost";
 import ClassMusicItem from "../usercomp/ClassMusicItem";
+import {inject, observer} from "mobx-react";
+import postsStore from "../../store/PostsStore"
+import MusicItem from "../usercomp/MusicItem";
 
 const song_data = {
     id: 14,
@@ -32,7 +35,64 @@ const song_data = {
         gengre: "Rock"
     }
 }
+const ClassPostItem2 = inject('postsStore')(observer(({post}) => {
+        console.log('post?..')
+        console.log(post.user.name)
+        return (
+            <div className="post">
+                <div>
+                    <div className="post__content">
+                        <UserItem user={post.user}/>
 
+                        <h3>
+                            {post.message}
+                        </h3>
+                        {post !== undefined && post.picture !== undefined && post.picture != null ? (
+                            <img src={"http://localhost:8100/files/photo/" + post.picture.name}
+                                 width={500}
+                                 height={500} alt={content}/>
+
+                        ) : (
+                            <div>
+                                <img src={content} width={500}
+                                     height={500}/>
+                            </div>
+                        )}
+
+                        {
+                            post.songName !== undefined && post.songName !== '' ? (
+                                /*<h1>ClassMusicItem</h1>*/
+                                <MusicItem song_data={song_data}/>
+                                /*<PlayerItemPost song={song_data.song} song_data={song_data}/>*/
+                            ) : (
+                                <div/>
+                            )
+
+                        }
+                        <DataItem date={post.date} time={post.time}/>
+                    </div>
+                    <CommentList comments={post.comments}/>
+                    {
+                        postsStore.haveNextComments(post.id) ? (
+                            <button onClick={() => postsStore.getNextComments(post.id, 5)}>NEXT 5</button>
+                        ) : (<div/>)
+                        // this.state.isHaveNextComments ? (
+                        //     <button
+                        //         onClick={this.getNext}>NEXT {(post.comments.length - this.state.comment_count) > 10 ? 10 : post.comments.length - this.state.comment_count}</button>
+                        // ) : (
+                        //     <div/>
+                        // )
+                    }
+                    {/*<button onClick={() => postsStore.getNextComments(post.id, 5)}>NEXT 10</button>*/}
+                    <CommentEditor id={post.id}/>
+                </div>
+            </div>
+        )
+    }
+    )
+)
+
+/*
 class ClassPostItem extends React.Component {
 
     constructor(props) {
@@ -126,7 +186,7 @@ class ClassPostItem extends React.Component {
                         {
                             this.state.isMusicPost ? (
                                 <ClassMusicItem song_data={song_data}/>
-                                /*<PlayerItemPost song={song_data.song} song_data={song_data}/>*/
+                                /!*<PlayerItemPost song={song_data.song} song_data={song_data}/>*!/
                             ) : (
                                 <div/>
                             )
@@ -144,12 +204,13 @@ class ClassPostItem extends React.Component {
                             <div/>
                         )
                     }
-                    {/*<button onClick={this.getNext}>NEXT 10</button>*/}
-                    <CommentEditor user={this.props.post.user} props={this.props}/>
+                    {/!*<button onClick={this.getNext}>NEXT 10</button>*!/}
+                    <CommentEditor props={this.props}/>
                 </div>
             </div>
         )
     }
 }
+*/
 
-export default ClassPostItem
+export default ClassPostItem2

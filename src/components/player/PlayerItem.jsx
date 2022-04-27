@@ -5,27 +5,29 @@ import next from "./next.png";
 import prev from "./prev.png";
 import AudioControls from "./AudioConrols";
 import {render} from "react-dom";
+import musicStore from "../../store/MusicStore"
+import {inject, observer} from "mobx-react";
 
 let isHavePlaying = true
-const PlayerItem = ({songs_data}) => {
-    const [tracks, setTracks] = useState([
-        {
-            title: " ",
-            artist: " ",
-            audioSrc: " ",
-            image: " ",
-            color: " "
-        }
-    ])
+const PlayerItem = inject('musicStore')(observer(({songs_data}) => {
+    /*    const [tracks, setTracks] = useState([
+            {
+                title: " ",
+                artist: " ",
+                audioSrc: " ",
+                image: " ",
+                color: " "
+            }
+        ])*/
 
-    useEffect(() => {
-            audioRef.current.pause();
-            if (songs_data.length === 0) {
+    /*useEffect(() => {
+            musicStore.audioRef.current.pause();
+            if (musicStore.songs.length === 0) {
                 isHavePlaying = false;
             } else {
                 let tracks1 = []
                 isHavePlaying = true
-                songs_data.map((song_data) =>
+                musicStore.songs.map((song_data) =>
                     tracks1.push({
                         title: song_data.song.name,
                         artist: song_data.song.author,
@@ -35,207 +37,167 @@ const PlayerItem = ({songs_data}) => {
                     })
                 )
 
-                setTracks(tracks1)
-                audioRef.current = new Audio("http://localhost:8100/files/music/" + tracks1[0].audioSrc);
-                setTrackProgress(audioRef.current.currentTime);
-                audioRef.current.play();
-                setIsPlaying(true)
+                musicStore.tracks = (tracks1)
+                musicStore.audioRef.current = new Audio("http://localhost:8100/files/music/" + tracks1[0].audioSrc);
+                musicStore.trackProgress = (musicStore.audioRef.current.currentTime);
+                musicStore.audioRef.current.play();
+                musicStore.isPlaying = (true)
+
             }
-        }, [songs_data]
-    )
-
-    function init() {
-        if (songs_data.length === 0) {
-            isHavePlaying = false;
-        } else {
-            tracks.length = 0
-            isHavePlaying = true
-            songs_data.map((song_data) =>
-                tracks.push({
-                    title: song_data.song.name,
-                    artist: song_data.song.author,
-                    audioSrc: song_data.songName,
-                    image: song_data.picture.name,
-                    color: "string",
-                })
-            )
-
-            /*if (isPlaying) {
-                clearInterval(intervalRef.current);
-                audioRef.current.pause();
-            }
-            audioRef.current = new Audio("http://localhost:8100/files/music/" + audioSrc);
-            audioRef.current.play();
-            setIsPlaying(true);
-            startTimer();
-            isReady.current = true*/
-            //setIsPlaying(true)
-
-            //isReady.current = true;
-
-        }
-
-    }
+        }, [musicStore.songs]
+    )*/
 
 
-    const [trackIndex, setTrackIndex] = useState(0);
-    const [trackProgress, setTrackProgress] = useState(0);
-    const [isPlaying, setIsPlaying] = useState(false);
+    /*
 
-    const {title, artist, color, image, audioSrc} = tracks[trackIndex];
-    const audioRef = useRef(new Audio("http://localhost:8100/files/music/" + audioSrc));
-    const intervalRef = useRef();
-    const isReady = useRef(false);
-    const {duration} = audioRef.current;
+        const [trackIndex, setTrackIndex] = useState(0);
+        const [trackProgress, setTrackProgress] = useState(0);
+        const [isPlaying, setIsPlaying] = useState(false);
+
+        const {title, artist, color, image, audioSrc} = tracks[trackIndex];
+        const audioRef = useRef(new Audio("http://localhost:8100/files/music/" + audioSrc));
+        const intervalRef = useRef();
+        const isReady = useRef(false);
+
+    */
 
 
     const toPrevTrack = () => {
-        if (trackIndex - 1 < 0) {
-            setTrackIndex(tracks.length - 1);
+        if (musicStore.trackIndex - 1 < 0) {
+            musicStore.trackIndex = (musicStore.tracks.length - 1);
         } else {
-            setTrackIndex(trackIndex - 1);
+            musicStore.trackIndex = (musicStore.trackIndex - 1);
         }
-        setIsPlaying(false)
+        musicStore.isPlaying = (false)
 
     }
 
     const toNextTrack = () => {
-        if (trackIndex < tracks.length - 1) {
-            setTrackIndex(trackIndex + 1);
+        if (musicStore.trackIndex < musicStore.tracks.length - 1) {
+            musicStore.trackIndex = (musicStore.trackIndex + 1);
         } else {
-            setTrackIndex(0);
+            musicStore.trackIndex = (0);
         }
-        setIsPlaying(false)
+        musicStore.isPlaying = false
     }
 
 
     const startTimer = () => {
         // Clear any timers already running
-        clearInterval(intervalRef.current);
-        intervalRef.current = setInterval(() => {
-            if (audioRef.current.ended) {
+        clearInterval(musicStore.intervalRef.current);
+        musicStore.intervalRef.current = setInterval(() => {
+            if (musicStore.audioRef.current.ended) {
                 toNextTrack();
             } else {
-                setTrackProgress(audioRef.current.currentTime);
+                musicStore.trackProgress = (musicStore.audioRef.current.currentTime);
             }
         }, [1000]);
     }
 
 
-    useEffect(() => {
-        if (isPlaying) {
-            audioRef.current.play();
+    /*useEffect(() => {
+        if (musicStore.isPlaying) {
+            musicStore.audioRef.current.play();
             startTimer();
         } else {
-            clearInterval(intervalRef.current);
-            audioRef.current.pause();
+            clearInterval(musicStore.intervalRef.current);
+            musicStore.audioRef.current.pause();
         }
-    }, [isPlaying]);
+    }, [musicStore.isPlaying]);
 
-    useEffect(() => {
-        if (isPlaying) {
-            audioRef.current.play();
-            startTimer();
-        } else {
-            clearInterval(intervalRef.current);
-            audioRef.current.pause();
-        }
-    }, [isPlaying]);
+
     useEffect(() => {
         // Pause and clean up on unmount
         return () => {
-            audioRef.current.pause();
-            clearInterval(intervalRef.current);
+            musicStore.audioRef.current.pause();
+            clearInterval(musicStore.intervalRef.current);
         }
     }, []);
     useEffect(() => {
-        audioRef.current.pause();
-        audioRef.current = new Audio("http://localhost:8100/files/music/" + audioSrc);
-        setTrackProgress(audioRef.current.currentTime);
-        audioRef.current.play();
-        setIsPlaying(true);
+        musicStore.audioRef.current.pause();
+        musicStore.audioRef.current = new Audio("http://localhost:8100/files/music/" + musicStore.audioSrc);
+        musicStore.trackProgress = (musicStore.audioRef.current.currentTime);
+        musicStore.audioRef.current.play();
+        musicStore.isPlaying = (true);
         startTimer();
 
-    }, [trackIndex]);
-
-    useEffect(() => {
-            audioRef.current.pause();
-            audioRef.current = new Audio("http://localhost:8100/files/music/" + audioSrc);
-            setTrackProgress(audioRef.current.currentTime);
-            audioRef.current.play();
-            setIsPlaying(true);
-            startTimer();
-        }, [isReady]
-    )
-
+    }, [musicStore.trackIndex]);
+*/
 
     const onScrub = (value) => {
         // Clear any timers already running
-        clearInterval(intervalRef.current);
-        audioRef.current.currentTime = value;
+        clearInterval(musicStore.intervalRef);
+        musicStore.audioRef.currentTime = value;
+        musicStore.trackProgress = musicStore.audioRef.currentTime
+        musicStore.startTimer()
 
-        setTrackProgress(audioRef.current.currentTime);
     }
+    /*const {duration} = musicStore.audioRef;*/
 
     const onScrubEnd = () => {
         // If not already playing, start
 
-        if (!isPlaying) {
-            setIsPlaying(true);
+        if (!musicStore.isPlaying) {
+
+            musicStore.isPlaying = (true);
         }
         startTimer();
     }
-    const currentPercentage = duration ? `${(trackProgress / duration) * 100}%` : '0%';
-    const trackStyling = `-webkit-gradient(linear, 0% 0%, 100% 0%, color-stop(${currentPercentage}, #fff), color-stop(${currentPercentage}, #777))`;
+    const currentPercentage = musicStore.duration ? `${(musicStore.trackProgress / musicStore.duration) * 100}%` : '0%';
+    /*const trackStyling = `-webkit-gradient(linear, 0% 0%, 100% 0%, color-stop(${currentPercentage}, #fff), color-stop(${currentPercentage}, #777))`;*/
 
     //init()
     return (
-        isHavePlaying ? (<div className="audio-player">
+        musicStore.isHavePlaying ? (<div className="audio-player">
             <div className="audio-info">
                 <img
                     className="artwork"
-                    src={"http://localhost:8100//files/photo/" + image}
-                    alt={`track artwork for ${title} by ${artist}`
+                    src={"http://localhost:8100/files/photo/" + musicStore.image}
+                    alt={`track artwork for ${musicStore.title} by ${musicStore.artist}`
                     }
                 />
                 <div>
-                    <h5 className="title">{title}</h5>
-                    <h5 className="artist">{artist}</h5>
+                    <h5 className="title">{musicStore.title}</h5>
+                    <h5 className="artist">{musicStore.artist}</h5>
                 </div>
 
             </div>
 
             <div className="audio-player-control">
-                <img onClick={toPrevTrack} className="audio-control-prev" src={prev} width={25} height={25}/>
-                {isPlaying ? (
+                <img onClick={() => musicStore.toPrevTrack()} className="audio-control-prev" src={prev} width={25}
+                     height={25}/>
+                {musicStore.isPlaying ? (
                     <img onClick={event => {
-                        setIsPlaying(!isPlaying)
+                        musicStore.pauseMethod()
+                        /*musicStore.isPlaying=!musicStore.isPlaying*/
                     }} className="audio-control-pl_ps" src={stop} width={50} height={50}/>
                 ) : (
                     <img onClick={event => {
-                        setIsPlaying(!isPlaying)
+                        musicStore.playMethod()
+                        /*musicStore.isPlaying = !musicStore.isPlaying*/
                     }} className="audio-control-pl_ps" src={start} width={50} height={50}/>
                 )
                 }
-                <img onClick={toNextTrack} className="audio-control-next" src={next} width={25} height={25}/>
-                <h6 className="audio-current">{((trackProgress | 0) / 60) | 0}:{
-                    ((trackProgress | 0) % 60) > 9 ? ((trackProgress | 0) % 60) : ("0" + (trackProgress | 0) % 60)
+                <img onClick={() => musicStore.toNextTrack()} className="audio-control-next" src={next} width={25}
+                     height={25}/>
+                <h6 className="audio-current">{((musicStore.trackProgress | 0) / 60) | 0}:{
+                    ((musicStore.trackProgress | 0) % 60) > 9 ? ((musicStore.trackProgress | 0) % 60) : ("0" + (musicStore.trackProgress | 0) % 60)
                 }</h6>
                 <div className="progress_div">
                     <input
                         type="range"
-                        value={trackProgress}
+                        value={musicStore.trackProgress}
                         step="1"
                         min="0"
-                        max={duration ? duration : `${duration}`}
+                        max={musicStore.audioRef.duration ? musicStore.audioRef.duration : `${musicStore.audioRef.duration}`}
                         className="progress"
                         onChange={(e) => onScrub(e.target.value)}
-                        onMouseUp={onScrubEnd}
-                        onKeyUp={onScrubEnd}
+                        /*onMouseUp={onScrubEnd}
+                        onKeyUp={onScrubEnd}*/
                     />
                 </div>
-                <h6 className="audio-total">{((duration | 0) / 60) | 0}:{
-                    ((duration | 0) % 60) > 9 ? ((duration | 0) % 60) : ("0" + (duration | 0) % 60)
+                <h6 className="audio-total">{((musicStore.audioRef.duration | 0) / 60) | 0}:{
+                    ((musicStore.audioRef.duration | 0) % 60) > 9 ? ((musicStore.audioRef.duration | 0) % 60) : ("0" + (musicStore.audioRef.duration | 0) % 60)
                 }</h6>
             </div>
 
@@ -245,8 +207,7 @@ const PlayerItem = ({songs_data}) => {
             </div>
         )
 
-
     )
 
-}
+}))
 export default PlayerItem
