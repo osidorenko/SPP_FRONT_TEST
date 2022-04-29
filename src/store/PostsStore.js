@@ -4,6 +4,7 @@ class PostsStore {
     @observable posts = []
     @observable text = '';
     @observable text_form_editor
+
     pCurrent = 0
     @observable commentsPost = []
 
@@ -51,10 +52,17 @@ class PostsStore {
                         comment_count: post.comments.length
                     }
                     this.commentsPost.push(bufferComments)
+
                     post.comments = []
+                    var songs = []
+                    post.songs.map((songm2m) =>
+                        songs.push(songm2m.songData)
+                    )
+                    post.songName = songs
                     this.posts.push(post)
                     this.getNextComments(post.id, 2)
                 })
+
                 this.pCurrent = this.pCurrent + 1
             } else {
                 if (request.status === 404) {
@@ -118,7 +126,7 @@ class PostsStore {
         }
         let temp = this.commentsPost[l]
         temp.comments.push(addedcomment)
-        temp.comment_count=temp.comment_count+1
+        temp.comment_count = temp.comment_count + 1
         this.commentsPost.slice(l, 1, temp)
 
         /*

@@ -13,11 +13,11 @@ class MusicStore {
     @observable artist
     @observable image
     @observable audioSrc
-    isHavePlaying = true
+    @observable isHavePlaying = true
 
 
     constructor() {
-
+        this.isHavePlaying = false
     }
 
     isPlaySong(song_id) {
@@ -48,7 +48,6 @@ class MusicStore {
             this.trackIndex = 0
             this.iniMethod()
         }
-
     }
 
 
@@ -89,6 +88,7 @@ class MusicStore {
 
 
     iniMethod(id) {
+        this.isHavePlaying = true
         console.log("song init start")
         //this.audioRef.current.pause();
         if (this.songs.length === 0) {

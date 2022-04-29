@@ -1,5 +1,4 @@
 import React from 'react';
-import PostItem from "./PostItem";
 import ClassPostItem from "./ClassPostItem";
 import {inject, observer} from "mobx-react";
 

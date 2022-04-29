@@ -3,7 +3,7 @@ import start from "./play.png";
 import stop from "./stop.png";
 import next from "./next.png";
 import prev from "./prev.png";
-import AudioControls from "./AudioConrols";
+
 import {render} from "react-dom";
 import musicStore from "../../store/MusicStore"
 import {inject, observer} from "mobx-react";

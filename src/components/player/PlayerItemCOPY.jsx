@@ -3,12 +3,13 @@ import start from "./play.png";
 import stop from "./stop.png";
 import next from "./next.png";
 import prev from "./prev.png";
-import AudioControls from "./AudioConrols";
+
 import {render} from "react-dom";
 
 import {inject, observer} from "mobx-react";
 
 let isHavePlaying = true
+//todo not used delete!
 const PlayerItemCOPY = ({songs_data}) => {
     const [tracks, setTracks] = useState([
         {

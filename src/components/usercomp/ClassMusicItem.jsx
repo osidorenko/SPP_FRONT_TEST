@@ -5,7 +5,7 @@ import play from "../png/play.png"
 import pause from "../png/pause1.png"
 import {observer} from "mobx-react";
 
-
+//todo delete never used!
 class ClassMusicItem extends React.Component {
 
     constructor(props) {

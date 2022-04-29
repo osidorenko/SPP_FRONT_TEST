@@ -4,6 +4,8 @@ import App from "./App";
 import postsStore from "./store/PostsStore";
 import {observer, inject, Provider} from "mobx-react"
 import musicStore from "./store/MusicStore";
+import postEditorStore from "./store/PostEditorStore"
+import musicEditorStore from "./store/MusicEditorStore"
 
 export const User = {
     id: 2,
@@ -16,6 +18,8 @@ export const User = {
 const stores = {
     postsStore,
     musicStore,
+    postEditorStore,
+    musicEditorStore,
     user: User
 }
 ReactDOM.render(

@@ -1,77 +1,74 @@
 import React, {useState} from "react";
 import {inject, observer} from "mobx-react";
-import pic from "./png/content.png"
-
-const PostsEditor = /*inject('postsStore', 'user')(observer(*/({postsStore, user}) => {
-
-    function fileinfo() {
-        const file = document.getElementById('input').files[0]
-        let reader = new FileReader();
-        reader.readAsArrayBuffer(file)
-        reader.onload = function () {
-            console.log(reader);
-        };
-        /*var path = (window.URL || window.webkitURL).createObjectURL(file);
-        console.log('path', path);*/
-        console.log(file)
-
-        /*
-                console.log(file.webkitdirectory)
-                console.log(document.getElementById('input').files[0].filePath)*/
-    }
-
-    function sendData() {
-        var formdata = new FormData();
-        const file = document.getElementById('inputPNG').files[0]
-        formdata.append("file", file);
-        var requestOptions = {
-            method: 'POST',
-            body: formdata,
-            redirect: 'follow'
-        };
-
-        fetch("http://localhost:8100/upload/photo/", requestOptions)
-            .then(response => response.text())
-            .then(result => console.log(result))
-            .catch(error => console.log('error', error));
-    }
-
-    function sendDataMusic() {
-        var formdata = new FormData();
-        const file = document.getElementById('inputMP3').files[0]
-        formdata.append("file", file);
-        var requestOptions = {
-            method: 'POST',
-            body: formdata,
-            redirect: 'follow'
-        };
-
-        fetch("http://localhost:8100/upload/music/", requestOptions)
-            .then(response => response.text())
-            .then(result => console.log(result))
-            .catch(error => console.log('error', error));
-    }
+import pic from "./png/download.png"
+import MusicItem from "./usercomp/MusicItem";
+import postEditorStore from "../store/PostEditorStore"
 
 
-    return (
-        <div className="post_editor_form">
-            <h2>Add Post</h2>
-            <div>
+const PostsEditor = inject('postEditorStore', 'user')(observer(({postEditorStore, user}) => {
+
+        return (
+            <div className="post_editor_form">
+                <h2>Добавить новый пост</h2>
+
                 <div>
-                    <input type="file" id="inputPNG" width={50} height={50} accept=".png"/>
-                    <button onClick={sendData}>SEND PHOTO</button>
+                    <h3>Сообщение поста</h3>
+                    <textarea value={postEditorStore.text_post}
+                              onChange={event => postEditorStore.setText(event.target.value)}
+                              maxLength={256} cols={50}
+                              rows={4}></textarea>
                 </div>
-                {/*<div>
-                    <input type="file" id="inputMP3" accept=".mp3"/>
 
-                    <button onClick={sendDataMusic}>SEND MUSIC</button>
-                </div>*/}
+                {postEditorStore.isChoseMusic ? (
 
+                    <div onClick={() => postEditorStore.isChoseMusic = false}>
+                        <h3>Здесь выбраны треки???</h3>
+                        {/*<MusicItem song_data={tempTrack}/>*/}
+                    </div>
+                ) : (
+                    <div>
+                        <h3>Добавить трек</h3>
+                        <button onClick={() => {
+                            postEditorStore.isChoseMusic = true
+                        }}>ВЫБРАТЬ
+                        </button>
+                    </div>
+
+                )}
+
+                {postEditorStore.isChose ? (
+                    <div>
+                        <h3>Удалить фото</h3>
+                        <img onClick={() => postEditorStore.isChose = false} width={200} height={200}
+                             src={postEditorStore.fil}/>
+                    </div>
+                ) : (
+                    <div className="input__wrapper">
+                        <h3>Добавить фото</h3>
+                        <input type="file" id="inputPNG" name="file" onChange={() => {
+                            var reader = new FileReader()
+                            reader.onload = () => {
+                                console.log(reader.result)
+                                postEditorStore.fil = reader.result
+                            }
+                            const file = document.getElementById('inputPNG').files[0]
+                            postEditorStore.fileC = file
+                            /*setFileC(file)*/
+                            reader.readAsDataURL(file);
+                            postEditorStore.isChose = true
+                        }} className="input input__file" accept=".png"/>
+                        <label htmlFor="inputPNG" className="input__file-button">
+                    <span className="input__file-icon-wrapper"><img className="input__file-icon" src={pic}
+                                                                    alt="Выбрать файл" width="25"/></span>
+                        </label>
+                    </div>
+                )
+                }
+                <button onClick={() => postEditorStore.addNewPost(user)}>СОЗДАТЬ ПОСТ</button>
+                <button>НАЗАД</button>
             </div>
-
-        </div>
+        )
+    }
     )
-}
-/*)
-)*/
+)
 export default PostsEditor

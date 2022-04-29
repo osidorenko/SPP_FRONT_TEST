@@ -3,28 +3,23 @@ import {observer, inject, Provider} from "mobx-react"
 import {observable} from "mobx";
 
 
-import Counter from "./components/postcomp/Counter";
-
-
 import './css/app.css'
 
-import ClassPostsPage from "./components/ClassPostsPage";
+
 import PlayerItem from "./components/player/PlayerItem";
-import PlayerItemPost from "./components/player/PlayerItemPost";
+
 import HeadItem from "./components/postcomp/HeadItem";
-import ClassAuthorizationItem from "./components/ClassAuthorizationItem";
-import UserInfoItem from "./components/usercomp/UserInfoItem";
-import ClassMusicItem from "./components/usercomp/ClassMusicItem";
-import MusicListItem from "./components/usercomp/MusicListItem";
-import postsStore from "./store/PostsStore"
+
 import PostsPage from "./components/PostsPage";
-import PlayerItemCOPY from "./components/player/PlayerItemCOPY";
+
 import PostsEditor from "./components/PostsEditor";
+import MusicEditor from "./components/MusicEditor";
+import UserInfoItem from "./components/usercomp/UserInfoItem";
 
 let pCurrent = 0
 
 function App() {
-    const [posts, setPosts] = useState([
+    /*const [posts, setPosts] = useState([
         {
             id: 1,
             user: {
@@ -168,7 +163,7 @@ function App() {
     }]
 
     const [songs_data, setSongs_data] = useState([
-        /*{
+        /!*{
             id: 14,
             user: {
                 id: 2,
@@ -191,9 +186,9 @@ function App() {
                 raiting: 3.5,
                 gengre: "Rock"
             }
-        }*/
+        }*!/
     ])
-
+*/
     const user = {
         id: 2,
         name: "Nirvana",
@@ -203,27 +198,16 @@ function App() {
         }
     }
 
-    const createMusic = (newMusic) => {
-        setSongs_data([])
-        let songs = []
-        newMusic.map((song) =>
-            songs.push(song)
-        )
-        setSongs_data(songs)
-    }
 
     return (
         <div className="App">
             <HeadItem/>
-
+            <UserInfoItem user={user}/>
+            <MusicEditor/>
             <PostsEditor/>
-            {/*<PostsPage/>*/}
-
-            {/*
-            <div className="post">
-                <MusicListItem create={createMusic} songs_data={songs}/>
-            </div>
-            <PlayerItem songs_data={songs_data}/>*/}
+            <PostsPage/>
+            <PlayerItem/>
+            <div className="empty"/>
             <div className="empty"/>
 
             {/*<ClassPostsPage/>*/}
