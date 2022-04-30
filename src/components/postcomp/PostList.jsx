@@ -2,7 +2,7 @@ import React from 'react';
 import ClassPostItem from "./ClassPostItem";
 import {inject, observer} from "mobx-react";
 
-const PostList = inject('postsStore')(observer(({postsStore, title}) => {
+const PostList = inject('postsStore')(observer(({postsStore}) => {
     return (
         <div>
             {

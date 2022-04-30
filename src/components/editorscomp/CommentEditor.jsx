@@ -1,7 +1,7 @@
 import React, {useState} from "react";
-import postsStore from "../store/PostsStore"
+import postsStore from "../../store/PostsStore"
 import {inject, observer} from "mobx-react";
-import defAvater from "./png/defAvatar.png"
+import defAvater from "../png/defAvatar.png"
 
 const CommentEditor = inject('postsStore', 'user')(observer(({postsStore, user, id}) => {
     const sendMessage = () => {

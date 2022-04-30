@@ -51,6 +51,7 @@ const MusicItem = inject('musicStore')(observer(({songs_data, song_data}) => {
                     }
                     </h4>
                 </div>
+
             </div>
         )
     }

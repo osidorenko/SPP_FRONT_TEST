@@ -7,8 +7,8 @@ import {observer} from "mobx-react";
 const PostsPage = observer(() => {
         return (
             <div>
-                <PostList posts={postsStore.posts} title={"1.SHIT POSTS LIST"}/>
-                <button onClick={()=>postsStore.getNextPosts()}>doRequest</button>
+                <PostList posts={postsStore.posts}/>
+                <button onClick={() => postsStore.getTwoPosts()}>Следующий пост</button>
             </div>
         )
     }

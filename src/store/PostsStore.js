@@ -1,14 +1,35 @@
-import {action, makeAutoObservable, observable, runInAction} from "mobx";
+import {action, observable, runInAction} from "mobx";
+import userStore from "../store/UserStore";
+import {observer} from "mobx-react";
 
 class PostsStore {
     @observable posts = []
     @observable text = '';
     @observable text_form_editor
+    @observable commentsPost = []
+    user
 
     pCurrent = 0
-    @observable commentsPost = []
+    postsToRequestCounter = []
+
+    setUser(user) {
+        this.user = user
+        this.posts = []
+        this.text = '';
+        this.commentsPost = []
+        this.pCurrent = 0
+        this.postsToRequestCounter = []
+        var first = this.getListToUser()
+    }
 
     constructor() {
+        //this.user = userStore.user
+
+    }
+
+    @action
+    getTwoPosts() {
+        //this.getNextPosts()
         this.getNextPosts()
     }
 
@@ -17,17 +38,56 @@ class PostsStore {
         this.text = value
     }
 
+
+    getListToUser() {
+        var myHeaders = new Headers();
+        var postsIds = []
+
+        myHeaders.append("Content-Type", "application/json");
+
+        var requestOptions = {
+            method: 'GET',
+            headers: myHeaders,
+            redirect: 'follow'
+        };
+
+        fetch("http://localhost:8100/posts/to/author/" + this.user.id, requestOptions)
+            .then(response => response.text())
+            .then(result => {
+                var list = JSON.parse(result)
+                var i = 0
+                for (i = list.length - 1; i >= 0; i--) {
+                    postsIds.push(list[i][0])
+                }
+                this.setPostsIDs(postsIds)
+                this.getNextPosts(postsIds[0])
+            })
+            .catch(error => console.log('error', error));
+
+
+    }
+
+    setPostsIDs(postsIds) {
+        this.postsToRequestCounter = postsIds
+    }
+
     @action
-    getNextPosts() {
+    getNextPosts(firstpostID) {
         const request = new XMLHttpRequest();
-        request.open("GET", "http://localhost:8100/posts/" + this.pCurrent, true);
+        var req = this.postsToRequestCounter[this.pCurrent]
+
+        if (req === undefined) {
+            req = firstpostID;
+            this.pCurrent = this.pCurrent + 1
+        }
+        if (req === undefined) {
+            return
+        }
+        request.open("GET", "http://localhost:8100/posts/" + req, true);
         request.onload = () => {
-            console.log(request.status + " " + this.pCurrent)
+            console.log(request.status + " " + this.postsToRequestCounter[this.pCurrent])
             if (request.status === 200) {
                 let post = JSON.parse(request.responseText)
-                /*const bufferComments = {id: post.id, comments: post.comments}
-                runInAction(() => this.commentsPost.push(bufferComments));
-                post.comments = []*/
                 runInAction(() => {
                     post.comments.sort(function (a, b) {
                             if (a.date > b.date) {
@@ -52,7 +112,6 @@ class PostsStore {
                         comment_count: post.comments.length
                     }
                     this.commentsPost.push(bufferComments)
-
                     post.comments = []
                     var songs = []
                     post.songs.map((songm2m) =>
@@ -62,20 +121,12 @@ class PostsStore {
                     this.posts.push(post)
                     this.getNextComments(post.id, 2)
                 })
-
                 this.pCurrent = this.pCurrent + 1
             } else {
-                if (request.status === 404) {
-                    this.pCurrent = this.pCurrent + 1
-                    if (this.pCurrent < 10) {
-                        this.getNextPosts()
-                    }
-                }
+
             }
         }
-        //request.setRequestHeader("Content-Type", "application/json; charset=utf-8");
         request.send(null)
-
     }
 
     @action haveNextComments(post_id) {
@@ -116,7 +167,6 @@ class PostsStore {
 
 
     @action addNewComment(post_id, addedcomment) {
-
         let l = 0;
         let i = 0;
         for (i = 0; i < this.posts.length; i++) {
@@ -128,27 +178,6 @@ class PostsStore {
         temp.comments.push(addedcomment)
         temp.comment_count = temp.comment_count + 1
         this.commentsPost.slice(l, 1, temp)
-
-        /*
-        let temppost = this.posts[l];
-        console.log("addedcomment")
-        console.log(addedcomment)
-
-        temppost.comments.push(addedcomment)
-        this.posts.splice(l, 1, temppost);
-        const bufferComments = {
-            id: temppost.id,
-            comments: temppost.comments,
-            comment_count_view: 1000,
-            comment_count: temppost.comments.length
-        }
-        this.commentsPost.slice(l, 1, bufferComments)*/
-        //this.commentsPost[l].comments = this.posts[l].comments
-        /*this.posts.map((post) => {
-                if (post.id === post_id) {
-                    post.comments.push(addedcomment)
-                }
-            }*/
         this.getNextComments(post_id, 1000)
         this.setText('');
     }

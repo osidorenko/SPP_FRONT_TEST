@@ -1,8 +1,8 @@
 import React, {useState} from "react";
 import {inject, observer} from "mobx-react";
-import pic from "./png/download.png"
-import MusicItem from "./usercomp/MusicItem";
-import postEditorStore from "../store/PostEditorStore"
+import pic from "../png/download.png"
+import MusicItem from "../usercomp/MusicItem";
+import postEditorStore from "../../store/PostEditorStore"
 
 
 const PostsEditor = inject('postEditorStore', 'user')(observer(({postEditorStore, user}) => {
@@ -18,9 +18,7 @@ const PostsEditor = inject('postEditorStore', 'user')(observer(({postEditorStore
                               maxLength={256} cols={50}
                               rows={4}></textarea>
                 </div>
-
                 {postEditorStore.isChoseMusic ? (
-
                     <div onClick={() => postEditorStore.isChoseMusic = false}>
                         <h3>Здесь выбраны треки???</h3>
                         {/*<MusicItem song_data={tempTrack}/>*/}
@@ -48,12 +46,11 @@ const PostsEditor = inject('postEditorStore', 'user')(observer(({postEditorStore
                         <input type="file" id="inputPNG" name="file" onChange={() => {
                             var reader = new FileReader()
                             reader.onload = () => {
-                                console.log(reader.result)
+
                                 postEditorStore.fil = reader.result
                             }
                             const file = document.getElementById('inputPNG').files[0]
                             postEditorStore.fileC = file
-                            /*setFileC(file)*/
                             reader.readAsDataURL(file);
                             postEditorStore.isChose = true
                         }} className="input input__file" accept=".png"/>
@@ -65,7 +62,6 @@ const PostsEditor = inject('postEditorStore', 'user')(observer(({postEditorStore
                 )
                 }
                 <button onClick={() => postEditorStore.addNewPost(user)}>СОЗДАТЬ ПОСТ</button>
-                <button>НАЗАД</button>
             </div>
         )
     }

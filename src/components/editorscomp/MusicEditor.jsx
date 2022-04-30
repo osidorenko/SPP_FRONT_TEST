@@ -1,11 +1,8 @@
 import React from "react";
-import pic from "./png/download.png";
-import musicEditorStore from "../store/MusicEditorStore";
-import play from "./png/play.png";
-import pause from "./png/pause1.png";
-import def from "./png/content.png";
+import pic from "../png/download.png";
+import musicEditorStore from "../../store/MusicEditorStore";
+import pause from "../png/pause1.png";
 import {inject, observer} from "mobx-react";
-
 
 const MusicEditor = inject('musicEditorStore', 'user')(observer(({musicEditorStore, user}) => {
 
@@ -20,7 +17,22 @@ const MusicEditor = inject('musicEditorStore', 'user')(observer(({musicEditorSto
             </div>
             <div>
                 <h3>Выбрать трек</h3>
-                <input type="file" id="inputMP3" name="file" className="input input__file" accept=".mp3"/>
+                <input type="file" id="inputMP3" name="file" className="input input__file" accept=".mp3"
+                       onChange={() => {
+                           var reader = new FileReader()
+                           reader.onload = () => {
+                               musicEditorStore.fileRmus = reader.result
+                               const audio = new Audio(musicEditorStore.fileRmus)
+                               audio.onloadeddata = function () {
+                                   musicEditorStore.lasting = this.duration
+                               };
+                           }
+                           const file = document.getElementById('inputMP3').files[0]
+                           musicEditorStore.fileMusic = file
+                           reader.readAsDataURL(file);
+
+                           musicEditorStore.isChoseMusic = true
+                       }}/>
                 <label htmlFor="inputMP3" className="input__file-button">
                     <span className="input__file-icon-wrapper"><img className="input__file-icon" src={pic}
                                                                     alt="Выбрать файл" width="25"/></span>
@@ -31,12 +43,10 @@ const MusicEditor = inject('musicEditorStore', 'user')(observer(({musicEditorSto
                 <input type="file" id="inputPNG" name="file" onChange={() => {
                     var reader = new FileReader()
                     reader.onload = () => {
-                        console.log(reader.result)
                         musicEditorStore.fileR = reader.result
                     }
                     const file = document.getElementById('inputPNG').files[0]
                     musicEditorStore.filePic = file
-                    /*setFileC(file)*/
                     reader.readAsDataURL(file);
                     musicEditorStore.isChose = true
                 }}
@@ -47,7 +57,7 @@ const MusicEditor = inject('musicEditorStore', 'user')(observer(({musicEditorSto
                                                                     alt="Выбрать файл" width="25"/></span>
                 </label>
             </div>
-            <button>Добавить трек</button>
+
 
             <div className="music_item">
                 <div className="music_item__play">
@@ -73,6 +83,7 @@ const MusicEditor = inject('musicEditorStore', 'user')(observer(({musicEditorSto
                     </h4>
                 </div>
             </div>
+            <button onClick={() => musicEditorStore.addNeMusic(user)}>Добавить трек</button>
         </div>
 
     )

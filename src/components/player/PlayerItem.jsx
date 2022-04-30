@@ -10,56 +10,6 @@ import {inject, observer} from "mobx-react";
 
 let isHavePlaying = true
 const PlayerItem = inject('musicStore')(observer(({songs_data}) => {
-    /*    const [tracks, setTracks] = useState([
-            {
-                title: " ",
-                artist: " ",
-                audioSrc: " ",
-                image: " ",
-                color: " "
-            }
-        ])*/
-
-    /*useEffect(() => {
-            musicStore.audioRef.current.pause();
-            if (musicStore.songs.length === 0) {
-                isHavePlaying = false;
-            } else {
-                let tracks1 = []
-                isHavePlaying = true
-                musicStore.songs.map((song_data) =>
-                    tracks1.push({
-                        title: song_data.song.name,
-                        artist: song_data.song.author,
-                        audioSrc: song_data.songName,
-                        image: song_data.picture.name,
-                        color: "string",
-                    })
-                )
-
-                musicStore.tracks = (tracks1)
-                musicStore.audioRef.current = new Audio("http://localhost:8100/files/music/" + tracks1[0].audioSrc);
-                musicStore.trackProgress = (musicStore.audioRef.current.currentTime);
-                musicStore.audioRef.current.play();
-                musicStore.isPlaying = (true)
-
-            }
-        }, [musicStore.songs]
-    )*/
-
-
-    /*
-
-        const [trackIndex, setTrackIndex] = useState(0);
-        const [trackProgress, setTrackProgress] = useState(0);
-        const [isPlaying, setIsPlaying] = useState(false);
-
-        const {title, artist, color, image, audioSrc} = tracks[trackIndex];
-        const audioRef = useRef(new Audio("http://localhost:8100/files/music/" + audioSrc));
-        const intervalRef = useRef();
-        const isReady = useRef(false);
-
-    */
 
 
     const toPrevTrack = () => {
@@ -94,35 +44,6 @@ const PlayerItem = inject('musicStore')(observer(({songs_data}) => {
         }, [1000]);
     }
 
-
-    /*useEffect(() => {
-        if (musicStore.isPlaying) {
-            musicStore.audioRef.current.play();
-            startTimer();
-        } else {
-            clearInterval(musicStore.intervalRef.current);
-            musicStore.audioRef.current.pause();
-        }
-    }, [musicStore.isPlaying]);
-
-
-    useEffect(() => {
-        // Pause and clean up on unmount
-        return () => {
-            musicStore.audioRef.current.pause();
-            clearInterval(musicStore.intervalRef.current);
-        }
-    }, []);
-    useEffect(() => {
-        musicStore.audioRef.current.pause();
-        musicStore.audioRef.current = new Audio("http://localhost:8100/files/music/" + musicStore.audioSrc);
-        musicStore.trackProgress = (musicStore.audioRef.current.currentTime);
-        musicStore.audioRef.current.play();
-        musicStore.isPlaying = (true);
-        startTimer();
-
-    }, [musicStore.trackIndex]);
-*/
 
     const onScrub = (value) => {
         // Clear any timers already running

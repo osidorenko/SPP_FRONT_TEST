@@ -7,6 +7,7 @@ class PostEditorStore {
     @observable fileC
     @observable text_post = ''
 
+
     constructor() {
     }
 

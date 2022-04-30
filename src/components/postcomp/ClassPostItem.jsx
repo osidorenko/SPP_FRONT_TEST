@@ -3,7 +3,7 @@ import UserItem from "./UserItem";
 import content from "../png/content.png";
 import DataItem from "./DataItem";
 import CommentList from "./CommentList";
-import CommentEditor from "../CommentEditor";
+import CommentEditor from "../editorscomp/CommentEditor";
 import {inject, observer} from "mobx-react";
 import postsStore from "../../store/PostsStore"
 import MusicListItem from "../usercomp/MusicListItem";
@@ -15,10 +15,9 @@ const ClassPostItem2 = inject('postsStore')(observer(({post}) => {
                 <div>
                     <div className="post__content">
                         <UserItem user={post.user}/>
-
-                        <h3>
+                        <p className="text_post">
                             {post.message}
-                        </h3>
+                        </p>
                         {post !== undefined && post.picture !== undefined && post.picture != null ? (
                             <img src={"http://localhost:8100/files/photo/" + post.picture.name}
                                  width={500}
