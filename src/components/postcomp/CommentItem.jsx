@@ -6,7 +6,7 @@ const CommetnItem = ({comment}) => {
     return (
         <div className="comment">
             <div className="comment_head">
-                <UserItem user={comment.user}/>
+                <UserItem puser={comment.user}/>
                 <div className="comment_content">
                     <h4>{comment.message}</h4>
                 </div>

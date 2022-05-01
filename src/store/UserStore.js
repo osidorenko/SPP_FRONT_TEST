@@ -18,11 +18,11 @@ class UserStore {
     @observable isAddPost = false
     @observable isAddMusic = false
     @observable users
-
+    mainuser
 
     constructor() {
         this.getAllUsers()
-        console.log(this.users)
+        //console.log(this.users)
     }
 
     @action
@@ -36,6 +36,7 @@ class UserStore {
 
     reBuild(id, user) {
         var users = this.users
+        this.mainuser=user
         var i = 0
         for (i = 0; i < users.length; i++) {
             if (users[i].id === id) {
@@ -44,8 +45,8 @@ class UserStore {
             }
         }
         this.isHaveRules = user.id === this.user.id
-        postsStore.setUser(this.user)
-        songsStore.setUser(this.user)
+        postsStore.setUser(this.user,user)
+        songsStore.setUser(this.user,user)
         this.isPosts = false
         this.isAddPost = false
         this.isAddMusic = false
@@ -68,10 +69,6 @@ class UserStore {
                 runInAction(() =>
                     this.users = users
                 )
-
-                /*                users.map(user => {
-                                    this.users.push(user)
-                                })*/
             })
             .catch(error => console.log('error', error));
     }
@@ -89,7 +86,6 @@ class UserStore {
 
     @action
     setIsAddMusic(bol) {
-
         this.isAddMusic = bol
     }
 

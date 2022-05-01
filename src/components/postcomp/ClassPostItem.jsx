@@ -7,6 +7,7 @@ import CommentEditor from "../editorscomp/CommentEditor";
 import {inject, observer} from "mobx-react";
 import postsStore from "../../store/PostsStore"
 import MusicListItem from "../usercomp/MusicListItem";
+import SocialItem from "./SocialItems";
 
 const ClassPostItem2 = inject('postsStore')(observer(({post}) => {
 
@@ -14,7 +15,7 @@ const ClassPostItem2 = inject('postsStore')(observer(({post}) => {
             <div className="post">
                 <div>
                     <div className="post__content">
-                        <UserItem user={post.user}/>
+                        <UserItem puser={post.user}/>
                         <p className="text_post">
                             {post.message}
                         </p>
@@ -37,6 +38,7 @@ const ClassPostItem2 = inject('postsStore')(observer(({post}) => {
                                 <div/>
                             )
                         }
+                        <SocialItem post={post}/>
                         <DataItem date={post.date} time={post.time}/>
                     </div>
                     <CommentList comments={post.comments}/>

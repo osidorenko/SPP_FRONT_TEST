@@ -8,9 +8,10 @@ const UserInfoItem = ({user}) => {
         <div className="user__info">
             <div>
                 {user.picture === undefined ? (
-                    <img src={avatar} width={200} height={200}/>
+                    <img style={{borderRadius: "120px"}} src={avatar} width={200} height={200}/>
                 ) : (
-                    <img src={"http://localhost:8100/files/photo/" + user.picture.name} width={200} height={200}/>
+                    <img style={{borderRadius: "120px"}} src={"http://localhost:8100/files/photo/" + user.picture.name}
+                         width={200} height={200}/>
                 )}
 
             </div>

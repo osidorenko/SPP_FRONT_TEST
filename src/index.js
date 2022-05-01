@@ -9,22 +9,38 @@ import musicEditorStore from "./store/MusicEditorStore"
 import userStore from "./store/UserStore"
 import songsStore from "./store/SongsStore"
 
-export const User = {
+/*export const User = {
     id: 2,
     name: "Nirvana",
     picture: {
         id: 1,
         name: "defAvatar1.png"
     }
-}
-/*
-
+}*/
 export const User = {
     id: 3,
     name: "alexs",
     picture: {
         id: 12,
-        name: "defAvatar1.png"
+        name: "alexava.png"
+    }
+}
+
+/*export const User = {
+    id: 6,
+    name: "KALEO",
+    picture: {
+        id: 999,
+        name: "kaleoava.png"
+    }
+}*/
+/*
+export const User = {
+    id: 4,
+    name: "olegsidor538",
+    picture: {
+        id: 13,
+        name: "radio.png"
     }
 }
 */

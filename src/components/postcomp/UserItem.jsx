@@ -1,6 +1,8 @@
 import React from "react";
+import {Link} from "react-router-dom";
+import {inject, observer} from "mobx-react";
 
-const UserItem = ({user}) => {
+const UserItem = inject('userStore', 'user')(observer(({userStore, user, puser}) => {
 
 
     const nameStyle = {
@@ -11,16 +13,21 @@ const UserItem = ({user}) => {
     }
 
     return (
-        <div className="user_comment">
-            <ul className="hr">
-                <li>
-                    {user.picture !== undefined ?
-                        <a href="https://vk.com/feed">
-                            <img src={"http://localhost:8100/files/photo/" + user.picture.name}
-                                 alt={""} width={50} height={50}/></a> : 'No?'}</li>
-            </ul>
-            <h3 style={nameStyle}> {user.name}</h3>
-        </div>
+        <Link to="/user">
+            <div className="user_comment" onClick={() => {
+                userStore.reBuild(puser.id, user)
+            }}>
+                <ul className="hr">
+                    <li>
+                        {puser.picture !== undefined ?
+                            <a>
+                                <img style={{borderRadius: "120px"}}
+                                     src={"http://localhost:8100/files/photo/" + puser.picture.name}
+                                     alt={""} width={50} height={50}/></a> : 'No?'}</li>
+                </ul>
+                <h3 style={nameStyle}> {puser.name}</h3>
+            </div>
+        </Link>
     );
-}
+}))
 export default UserItem;

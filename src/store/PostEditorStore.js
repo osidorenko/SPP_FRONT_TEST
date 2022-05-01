@@ -13,9 +13,7 @@ class PostEditorStore {
 
     sendData() {
         var formdata = new FormData();
-
         const file = this.fileC
-
         if (file === undefined) {
             return
         }
@@ -40,7 +38,7 @@ class PostEditorStore {
         myHeaders.append("Content-Type", "application/json");
         var raw = this.makeObjectTosend(user)
         if (raw === undefined) {
-            return
+            return false
         }
         var raw1 = JSON.stringify(raw)
         console.log(raw1)
@@ -63,6 +61,7 @@ class PostEditorStore {
             })
             .catch(error => console.log('error', error));
         this.sendData()
+        return true
     }
 
     @action

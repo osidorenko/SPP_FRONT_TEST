@@ -7,22 +7,37 @@ class PostsStore {
     @observable text = '';
     @observable text_form_editor
     @observable commentsPost = []
-    user
+    @observable socialPost = []
+    user /*= {
+        id: 2,
+        name: "Nirvana",
+        picture: {
+            id: 1,
+            name: "defAvatar1.png"
+        }
+    }*/
+    mainuser
 
+    hashmap = new Map()
     pCurrent = 0
     postsToRequestCounter = []
+    mainuser
 
-    setUser(user) {
+    setUser(user, mainuser) {
+        this.mainuser = mainuser
         this.user = user
         this.posts = []
         this.text = '';
         this.commentsPost = []
         this.pCurrent = 0
         this.postsToRequestCounter = []
+        this.hashmap = new Map()
+        this.socialPost = []
         var first = this.getListToUser()
     }
 
     constructor() {
+        //var first = this.getListToUser()
         //this.user = userStore.user
 
     }
@@ -105,6 +120,30 @@ class PostsStore {
                             return 0
                         }
                     )
+                    var social = {
+                        l: 0,
+                        dl: 0,
+                        isL: false,
+                        isDL: false
+                    }
+                    var lks = post.likes
+                    var i = 0
+                    for (i = 0; i < lks.length; i++) {
+                        if (lks[i].like === 0) {
+                            social.l = social.l + 1
+                        } else {
+                            social.dl = social.dl + 1
+                        }
+                        if (lks[i].user === this.mainuser.id) {
+                            if (lks[i].like === 0) {
+                                social.isL = true
+                            } else {
+                                social.isDL = true
+                            }
+                        }
+                    }
+                    this.hashmap.set(post.id, this.pCurrent)
+                    this.socialPost.push(social)
                     const bufferComments = {
                         id: post.id,
                         comments: post.comments,
@@ -182,6 +221,117 @@ class PostsStore {
         this.setText('');
     }
 
+    @action
+    clickLike(post_id,user_id) {
+        var i = this.hashmap.get(post_id)
+        var soc = this.socialPost[i]
+        this.deleteLike(user_id, post_id)
+        if (soc.isL) {
+            soc.isL = false
+            soc.l = soc.l - 1
+        } else {
+            soc.isL = true
+            if (soc.isDL) {
+                soc.dl = soc.dl - 1
+                soc.isDL = false
+            }
+            soc.l = soc.l + 1
+            this.addLike(user_id, post_id)
+        }
+        this.socialPost[i] = soc
+
+    }
+
+    @action
+    clickDisLike(post_id,user_id) {
+        var i = this.hashmap.get(post_id)
+        var soc = this.socialPost[i]
+        this.deleteLike(user_id, post_id)
+        if (soc.isDL) {
+            soc.isDL = false
+            soc.dl = soc.dl - 1
+        } else {
+            soc.isDL = true
+            if (soc.isL) {
+                soc.l = soc.l - 1
+                soc.isL = false
+            }
+            soc.dl = soc.dl + 1
+            this.addDislike(user_id, post_id)
+        }
+        this.socialPost[i] = soc
+
+    }
+
+    isLike(post_id) {
+        var i = this.hashmap.get(post_id)
+        var soc = this.socialPost[i]
+        if (soc === undefined) {
+            return false
+        }
+        return soc.isL
+    }
+
+    isDisLike(post_id) {
+        var i = this.hashmap.get(post_id)
+        var soc = this.socialPost[i]
+        if (soc === undefined) {
+            return false
+        }
+        return soc.isDL
+    }
+
+    getLikes(post_id) {
+        var i = this.hashmap.get(post_id)
+        var soc = this.socialPost[i]
+        if (soc === undefined) {
+            return 0
+        }
+        return soc.l
+    }
+
+    getDisLikes(post_id) {
+        var i = this.hashmap.get(post_id)
+        var soc = this.socialPost[i]
+        if (soc === undefined) {
+            return 0
+        }
+        return soc.dl
+    }
+
+    addLike(user_id, post_id) {
+        var requestOptions = {
+            method: 'POST',
+            redirect: 'follow'
+        };
+        fetch("http://localhost:8100/likes/" + post_id + "/" + user_id + "/0", requestOptions)
+            .then(response => response.text())
+            .then(result => console.log(result))
+            .catch(error => console.log('error', error));
+    }
+
+    addDislike(user_id, post_id) {
+        var requestOptions = {
+            method: 'POST',
+            redirect: 'follow'
+        };
+        fetch("http://localhost:8100/likes/" + post_id + "/" + user_id + "/1", requestOptions)
+            .then(response => response.text())
+            .then(result => console.log(result))
+            .catch(error => console.log('error', error));
+    }
+
+    deleteLike(user_id, post_id) {
+        console.log(post_id + " " + user_id)
+        var requestOptions = {
+            method: 'POST',
+            redirect: 'follow'
+        };
+        fetch("http://localhost:8100/likes/" + post_id + "/" + user_id + "", requestOptions)
+            .then(response => response.text())
+            .then(result => console.log(result))
+            .catch(error => console.log('error', error));
+    }
 
 }
 

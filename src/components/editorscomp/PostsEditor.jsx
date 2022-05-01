@@ -3,9 +3,10 @@ import {inject, observer} from "mobx-react";
 import pic from "../png/download.png"
 import MusicItem from "../usercomp/MusicItem";
 import postEditorStore from "../../store/PostEditorStore"
+import userStore from "../../store/UserStore";
 
 
-const PostsEditor = inject('postEditorStore', 'user')(observer(({postEditorStore, user}) => {
+const PostsEditor = inject('userStore', 'postEditorStore', 'user')(observer(({userStore, postEditorStore, user}) => {
 
         return (
             <div className="post_editor_form">
@@ -61,7 +62,14 @@ const PostsEditor = inject('postEditorStore', 'user')(observer(({postEditorStore
                     </div>
                 )
                 }
-                <button onClick={() => postEditorStore.addNewPost(user)}>СОЗДАТЬ ПОСТ</button>
+                <button onClick={() => {
+                    var bol = postEditorStore.addNewPost(user)
+                    if (bol) {
+                        console.log("added post")
+                        userStore.reBuild(user.id, user)
+                    }
+                }}>СОЗДАТЬ ПОСТ
+                </button>
             </div>
         )
     }

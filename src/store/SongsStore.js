@@ -11,7 +11,10 @@ class SongsStore {
     constructor() {
     }
 
-    setUser(user) {
+    mainuser
+
+    setUser(user, mainuser) {
+        this.mainuser = mainuser
         this.user = user
         this.songs = []
         this.songsBuffer = []

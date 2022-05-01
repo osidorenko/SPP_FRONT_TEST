@@ -17,8 +17,18 @@ import userStore from "./store/UserStore";
 import UserBlockItem from "./components/userspage/UserBlockItem";
 import UsersBlockPage from "./components/UsersBlockPage";
 import {Link, Route, BrowserRouter as Router, Switch} from 'react-router-dom';
+import PostsStore from "./store/PostsStore";
 
 let pCurrent = 0
+
+var user = {
+    id: 2,
+    name: "Nirvana",
+    picture: {
+        id: 1,
+        name: "defAvatar1.png"
+    }
+}
 
 function App() {
     return (
@@ -30,6 +40,9 @@ function App() {
                     </Route>
                     <Route path="/user">
                         <UserPage/>
+                    </Route>
+                    <Route path="/">
+                        <UsersBlockPage/>
                     </Route>
                 </Switch>
             </Router>

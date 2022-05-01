@@ -4,6 +4,37 @@
     box-sizing: border-box;
 }
 
+*:Link:active {
+    text-decoration: none;
+    text-decoration-color: black;
+    color: black;
+}
+
+*:Link:visited {
+    text-decoration: none;
+    text-decoration-color: black;
+    color: black;
+}
+
+*:link:active {
+    text-decoration: none;
+    text-decoration-color: black;
+    color: black;
+}
+
+*:link:visited {
+    text-decoration: none;
+    text-decoration-color: black;
+    color: black;
+
+}
+
+*:any-link {
+    text-decoration: none;
+    text-decoration-color: black;
+
+}
+
 #root {
     display: flex;
     justify-content: center;
@@ -15,6 +46,9 @@
     width: 800px;
 }
 
+.App:link {
+
+}
 
 .post {
 
@@ -483,4 +517,52 @@ input[type=range] {
     margin: auto;
     height: 100px;
     width: 100px;
+}
+
+.social_form {
+    display: flex;
+    margin-top: 5px;
+}
+
+.social_block {
+    display: flex;
+
+    height: 40px;
+    width: 60px;
+    padding: 5px;
+    border: 1px solid grey;
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 24px 24px rgba(0, 0, 0, 0.2);
+}
+
+.social_block:hover {
+    cursor: pointer;
+    display: flex;
+    height: 40px;
+    width: 60px;
+    padding: 3px;
+    border: 1.25px solid black;
+    background: #d7d7d7;
+    border-radius: 15px;
+    box-shadow: 0 24px 24px rgba(0, 0, 0, 0.2);
+}
+
+.social_block_choose {
+    cursor: pointer;
+    display: flex;
+    height: 40px;
+    width: 60px;
+    padding: 3px;
+    border: 1.25px solid black;
+    background: #d7d7d7;
+    border-radius: 15px;
+    box-shadow: 0 24px 24px rgba(0, 0, 0, 0.2);
+}
+
+.social_block_p {
+    top: 50%;
+    left: 50%;
+    margin-top: +6px;
+    margin-left: 6px;
 }
