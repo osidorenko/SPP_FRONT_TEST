@@ -357,7 +357,18 @@ input[type=range] {
     height: 50px;
     width: 50px;
 }
-
+.audio-control-menu1{
+    top: 50%;
+    left: 50%;
+    margin-top: +5px;
+    margin-left: -30px;
+}
+.audio-control-menu2{
+    top: 50%;
+    left: 50%;
+    margin-top: +10px;
+    margin-left: 0px;
+}
 .audio-info {
     display: flex;
 
@@ -366,12 +377,12 @@ input[type=range] {
 .audio-player-control {
     display: flex;
     position: fixed;
-    right: 20%;
+    left: 30%;
 }
 
 
 .post_editor_form {
-    height: 500px;
+    height: auto;
     width: 800px;
     align-content: center;
     padding: 15px;
@@ -471,10 +482,13 @@ input[type=range] {
 .user_block_item {
     width: 200px;
     height: 200px;
-    align-content: center;
+    display: inline-block;
+    margin-left: 35px;
+    margin-top: 35px;
+    align-content: start;
     padding: 15px;
     border: 2px solid black;
-    margin-top: 15px;
+
     background: white;
     border-radius: 15px;
     box-shadow: 0 24px 24px rgba(0, 0, 0, 0.2);
@@ -483,13 +497,15 @@ input[type=range] {
 .user_block_item:hover {
     width: 200px;
     height: 200px;
-    align-content: center;
+    display: inline-block;
+    margin-left: 35px;
+    margin-top: 35px;
+    align-content: start;
     padding: 15px;
     border: 2px solid black;
-    margin-top: 15px;
-    background: #d7d7d7;
     border-radius: 15px;
     box-shadow: 0 24px 24px rgba(0, 0, 0, 0.2);
+    background: #d7d7d7;
 
 }
 
@@ -526,7 +542,6 @@ input[type=range] {
 
 .social_block {
     display: flex;
-
     height: 40px;
     width: 60px;
     padding: 5px;
@@ -565,4 +580,34 @@ input[type=range] {
     left: 50%;
     margin-top: +6px;
     margin-left: 6px;
+}
+
+.music_item_like {
+    top: 50%;
+    left: 50%;
+    margin-top: +5px;
+    margin-left: -60px;
+    height: 20px;
+    width: 20px;
+}
+
+.music_item_like:hover {
+    top: 50%;
+    left: 50%;
+    margin-top: +4px;
+    margin-left: -60px;
+    height: 22px;
+    width: 22px;
+}
+
+.song_choose_form {
+    height: auto;
+    width: 800px;
+    align-content: center;
+    padding: 15px;
+    border: 2px solid black;
+    margin-top: 15px;
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 24px 24px rgba(0, 0, 0, 0.2);
 }

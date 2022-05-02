@@ -1,25 +1,12 @@
 import React, {useState} from "react";
-import {observer, inject, Provider} from "mobx-react"
-import {observable} from "mobx";
-
-
 import './css/app.css'
-
-
-import PlayerItem from "./components/player/PlayerItem";
-import HeadItem from "./components/postcomp/HeadItem";
-import PostsPage from "./components/PostsPage";
-import UserInfoItem from "./components/usercomp/UserInfoItem";
-import MusicUserItem from "./components/usercomp/MusicUserItem";
-import MusicEditor from "./components/editorscomp/MusicEditor";
 import UserPage from "./components/UserPage";
-import userStore from "./store/UserStore";
-import UserBlockItem from "./components/userspage/UserBlockItem";
 import UsersBlockPage from "./components/UsersBlockPage";
 import {Link, Route, BrowserRouter as Router, Switch} from 'react-router-dom';
-import PostsStore from "./store/PostsStore";
-
-let pCurrent = 0
+import PostsPage from "./components/PostsPage";
+import NewsPage from "./components/NewsPage";
+import SongChoose from "./components/editorscomp/SongChoose";
+import NowPlayItem from "./components/player/NowPlayItem";
 
 var user = {
     id: 2,
@@ -41,9 +28,19 @@ function App() {
                     <Route path="/user">
                         <UserPage/>
                     </Route>
+                    <Route path="/posts">
+                        <NewsPage/>
+                    </Route>
+                    <Route path="/choose">
+                        <SongChoose/>
+                    </Route>
+                    <Route path="/nowplay">
+                        <NowPlayItem/>
+                    </Route>
                     <Route path="/">
                         <UsersBlockPage/>
                     </Route>
+
                 </Switch>
             </Router>
         </div>

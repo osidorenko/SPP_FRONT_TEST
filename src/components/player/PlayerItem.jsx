@@ -3,10 +3,13 @@ import start from "./play.png";
 import stop from "./stop.png";
 import next from "./next.png";
 import prev from "./prev.png";
+import close from "./closeplayer.png";
+import list from "./listplayer.png";
 
 import {render} from "react-dom";
 import musicStore from "../../store/MusicStore"
 import {inject, observer} from "mobx-react";
+import {Link} from "react-router-dom";
 
 let isHavePlaying = true
 const PlayerItem = inject('musicStore')(observer(({songs_data}) => {
@@ -120,6 +123,15 @@ const PlayerItem = inject('musicStore')(observer(({songs_data}) => {
                 <h6 className="audio-total">{((musicStore.audioRef.duration | 0) / 60) | 0}:{
                     ((musicStore.audioRef.duration | 0) % 60) > 9 ? ((musicStore.audioRef.duration | 0) % 60) : ("0" + (musicStore.audioRef.duration | 0) % 60)
                 }</h6>
+                <Link to="nowplay">
+                    <img className="audio-control-menu1" src={list}
+                         width={20}
+                         height={20}/>
+                </Link>
+                <img onClick={() => musicStore.closeMethod()} className="audio-control-menu2" src={close}
+                     width={20}
+                     height={10}/>
+
             </div>
 
         </div>) : (

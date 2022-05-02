@@ -27,8 +27,6 @@ const UserPage = inject('postsStore', 'songsStore', 'userStore', 'user')(observe
                     userStore.setIsAddPost(false, user)
                 }}>Музыка
                 </button>
-
-
                 {userStore.isPosts ? (
                     <div>
                         {userStore.isAddPost ? (
@@ -76,7 +74,13 @@ const UserPage = inject('postsStore', 'songsStore', 'userStore', 'user')(observe
                                     <div/>
                                 )}
 
-                                <MusicUserItem/>
+                                <MusicUserItem isLove={false} title="Популярные треки"/>
+                                {userStore.isHaveRules ? (
+                                    <MusicUserItem isLove={true} title="Любимые треки" />
+                                ) : (
+                                    <div/>
+                                )
+                                }
                             </div>
                         )
                         }

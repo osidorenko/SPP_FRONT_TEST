@@ -20,6 +20,14 @@ const HeadItem = inject('postsStore', 'songsStore', 'userStore', 'user')(observe
                         <button>домой</button>
                     </div>
                 </Link>
+                <Link to="posts">
+                    <div onClick={() => {
+                        postsStore.setPosts(user)
+                    }}>
+                        <button>Посты</button>
+                    </div>
+                </Link>
+
             </div>
 
         </ul>

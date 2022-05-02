@@ -4,6 +4,8 @@ import pic from "../png/download.png"
 import MusicItem from "../usercomp/MusicItem";
 import postEditorStore from "../../store/PostEditorStore"
 import userStore from "../../store/UserStore";
+import MusicListChoose from "./MusicListChoose";
+import {Link} from "react-router-dom";
 
 
 const PostsEditor = inject('userStore', 'postEditorStore', 'user')(observer(({userStore, postEditorStore, user}) => {
@@ -20,17 +22,19 @@ const PostsEditor = inject('userStore', 'postEditorStore', 'user')(observer(({us
                               rows={4}></textarea>
                 </div>
                 {postEditorStore.isChoseMusic ? (
-                    <div onClick={() => postEditorStore.isChoseMusic = false}>
-                        <h3>Здесь выбраны треки???</h3>
-                        {/*<MusicItem song_data={tempTrack}/>*/}
+                    <div>
+                        <h3>Выбранные треки</h3>
+                        <MusicListChoose songs_data={postEditorStore.songsInList}/>
                     </div>
                 ) : (
                     <div>
-                        <h3>Добавить трек</h3>
-                        <button onClick={() => {
-                            postEditorStore.isChoseMusic = true
-                        }}>ВЫБРАТЬ
-                        </button>
+                        <h3>Добавить треки</h3>
+                        <Link to="choose">
+                            <button onClick={() => {
+                                postEditorStore.songsInPost = new Map()
+                            }}>ВЫБРАТЬ
+                            </button>
+                        </Link>
                     </div>
 
                 )}

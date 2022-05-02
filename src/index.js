@@ -17,6 +17,7 @@ import songsStore from "./store/SongsStore"
         name: "defAvatar1.png"
     }
 }*/
+/*
 export const User = {
     id: 3,
     name: "alexs",
@@ -25,25 +26,24 @@ export const User = {
         name: "alexava.png"
     }
 }
+*/
 
-/*export const User = {
+export const User = {
     id: 6,
     name: "KALEO",
     picture: {
         id: 999,
         name: "kaleoava.png"
     }
-}*/
-/*
-export const User = {
+}
+/*export const User = {
     id: 4,
     name: "olegsidor538",
     picture: {
         id: 13,
         name: "radio.png"
     }
-}
-*/
+}*/
 
 const stores = {
     userStore,

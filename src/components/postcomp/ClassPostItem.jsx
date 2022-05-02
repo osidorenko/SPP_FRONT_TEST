@@ -19,15 +19,13 @@ const ClassPostItem2 = inject('postsStore')(observer(({post}) => {
                         <p className="text_post">
                             {post.message}
                         </p>
-                        {post !== undefined && post.picture !== undefined && post.picture != null ? (
+                        {post !== undefined && post.picture !== undefined && post.picture !== null && post.picture.name !== '' ? (
                             <img src={"http://localhost:8100/files/photo/" + post.picture.name}
                                  width={500}
                                  height={500} alt={content}/>
 
                         ) : (
                             <div>
-                                <img src={content} width={500}
-                                     height={500}/>
                             </div>
                         )}
 

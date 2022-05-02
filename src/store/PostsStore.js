@@ -16,8 +16,6 @@ class PostsStore {
             name: "defAvatar1.png"
         }
     }*/
-    mainuser
-
     hashmap = new Map()
     pCurrent = 0
     postsToRequestCounter = []
@@ -35,6 +33,19 @@ class PostsStore {
         this.socialPost = []
         var first = this.getListToUser()
     }
+
+    setPosts(mainuser) {
+        this.mainuser = mainuser
+        this.posts = []
+        this.text = '';
+        this.commentsPost = []
+        this.pCurrent = 0
+        this.postsToRequestCounter = []
+        this.hashmap = new Map()
+        this.socialPost = []
+        this.getAllList()
+    }
+
 
     constructor() {
         //var first = this.getListToUser()
@@ -54,6 +65,27 @@ class PostsStore {
     }
 
 
+    getAllList() {
+        var postsIds = []
+        var requestOptions = {
+            method: 'GET',
+            redirect: 'follow'
+        };
+        fetch("http://localhost:8100/posts/all", requestOptions)
+            .then(response => response.text())
+            .then(result => {
+                    var list = JSON.parse(result)
+                    var i = 0
+                    for (i = list.length - 1; i >= 0; i--) {
+                        postsIds.push(list[i][0])
+                    }
+                    this.setPostsIDs(postsIds)
+                    this.getNextPosts(postsIds[0])
+                }
+            )
+            .catch(error => console.log('error', error));
+    }
+
     getListToUser() {
         var myHeaders = new Headers();
         var postsIds = []
@@ -65,7 +97,6 @@ class PostsStore {
             headers: myHeaders,
             redirect: 'follow'
         };
-
         fetch("http://localhost:8100/posts/to/author/" + this.user.id, requestOptions)
             .then(response => response.text())
             .then(result => {
@@ -78,8 +109,6 @@ class PostsStore {
                 this.getNextPosts(postsIds[0])
             })
             .catch(error => console.log('error', error));
-
-
     }
 
     setPostsIDs(postsIds) {
@@ -222,7 +251,7 @@ class PostsStore {
     }
 
     @action
-    clickLike(post_id,user_id) {
+    clickLike(post_id, user_id) {
         var i = this.hashmap.get(post_id)
         var soc = this.socialPost[i]
         this.deleteLike(user_id, post_id)
@@ -243,7 +272,7 @@ class PostsStore {
     }
 
     @action
-    clickDisLike(post_id,user_id) {
+    clickDisLike(post_id, user_id) {
         var i = this.hashmap.get(post_id)
         var soc = this.socialPost[i]
         this.deleteLike(user_id, post_id)

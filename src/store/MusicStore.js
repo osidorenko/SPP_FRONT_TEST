@@ -1,4 +1,5 @@
 import {action, observable} from "mobx";
+import userStore from "../store/UserStore";
 
 class MusicStore {
     @observable songs = []
@@ -16,6 +17,15 @@ class MusicStore {
     @observable isHavePlaying = true
 
 
+    /*
+    "likes": [
+            {
+                "user": 2,
+                "songData": 5
+            }
+        ]
+    * */
+
     constructor() {
         this.isHavePlaying = false
     }
@@ -30,6 +40,7 @@ class MusicStore {
 
     @action
     addMusicToList(song_data) {
+        this.isHavePlaying = true
         if (this.whoPlayed === song_data.song.id) {
             if (this.isPlaying) {
                 this.pauseMethod()
@@ -39,10 +50,23 @@ class MusicStore {
 
         } else {
             this.songs = []
+
             if (this.audioRef !== undefined) {
                 this.audioRef.pause();
             }
             this.whoPlayed = song_data.song.id
+            //this.user = userStore.getMainUser()
+
+            //song_data.likes
+            //todo delete???
+            /*this.hashmap = new Map()
+            song_data.likes.map(like => {
+                if (like.user === this.user.id) {
+                    this.hashmap.set(song_data.id, 1)
+                } else {
+                    this.hashmap.set(song_data.id, 0)
+                }
+            })*/
             this.songs.push(song_data)
             this.isPlaying = true
             this.trackIndex = 0
@@ -53,18 +77,22 @@ class MusicStore {
 
     @action
     addNewPlayList(songs, song_id) {
+        this.isHavePlaying = true
         if (this.whoPlayed === song_id) {
             if (this.isPlaying) {
+
                 this.pauseMethod()
             } else {
                 this.playMethod()
             }
         } else {
             this.songs = []
+
             if (this.audioRef !== undefined) {
                 this.audioRef.pause();
             }
             this.whoPlayed = song_id
+            //this.user = userStore.getMainUser()
             songs.map(song => {
                 this.songs.push(song)
 
@@ -88,6 +116,7 @@ class MusicStore {
 
 
     iniMethod(id) {
+
         this.isHavePlaying = true
         console.log("song init start")
         //this.audioRef.current.pause();
@@ -134,7 +163,12 @@ class MusicStore {
         console.log("doPause")
         this.audioRef.pause()
         this.isPlaying = false
+    }
 
+    @action
+    closeMethod() {
+        this.isHavePlaying = false
+        this.pauseMethod()
     }
 
     @action
@@ -209,7 +243,6 @@ class MusicStore {
     getAudioSrc() {
         return this.tracks[this.trackIndex].audioSrc
     }
-
 }
 
 export default new MusicStore()
