@@ -41,7 +41,7 @@ function App() {
                     <Route path="/nowplay">
                         <NowPlayItem/>
                     </Route>
-                    <Route path="/logins">
+                    <Route path="/login">
                         <Login_Page_Box/>
                     </Route>
                     <Route path="/registration">

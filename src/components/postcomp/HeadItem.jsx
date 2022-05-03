@@ -1,6 +1,11 @@
 import React from "react";
 import {Link} from "react-router-dom";
 import {inject, observer} from "mobx-react";
+import menu from "../png/menu.png"
+import users from "../png/users.png"
+import home from "../png/home.png"
+import news from "../png/news.png"
+import logout from "../png/logout.png"
 
 const HeadItem = inject('postsStore', 'songsStore', 'userStore', 'user')(observer(({postsStore, songsStore, userStore, user}) => {
 
@@ -8,7 +13,53 @@ const HeadItem = inject('postsStore', 'songsStore', 'userStore', 'user')(observe
         <ul className="header_main">
             <div className="logo_main">
                 <h1>SocialMusic</h1>
-                <Link to="users">
+                <div className="menu_item_head">
+                    <img onClick={() => userStore.menuAction()} src={menu} width={35} height={35}/>
+                    <div>
+                        {userStore.isMenuOpen ? (
+                            <div className="menu_item_show">
+                                <Link to="user">
+                                    <div className="menu_item_show_one" onClick={() => {
+                                        userStore.closeMenu()
+                                        userStore.reBuild(user.id, user)
+                                    }}>
+                                        <img src={home} width={35} height={35}/>
+                                        <p className="menu_item_show_one_text">домой</p>
+                                    </div>
+                                </Link>
+                                <Link to="users">
+                                    <div onClick={() => userStore.closeMenu()} className="menu_item_show_one">
+                                        <img src={users} width={35} height={35}/>
+                                        <p className="menu_item_show_one_text1">Пользователи</p>
+                                    </div>
+                                </Link>
+                                <Link to="posts">
+                                    <div className="menu_item_show_one" onClick={() => {
+                                        postsStore.setPosts(user)
+                                        userStore.closeMenu()
+                                    }}>
+                                        <img src={news} width={35} height={35}/>
+                                        <p className="menu_item_show_one_text">Посты</p>
+                                    </div>
+                                </Link>
+                                <Link to="login">
+                                    <div className="menu_item_show_one" onClick={() => {
+                                        userStore.closeMenu()
+                                    }}>
+                                        <img src={logout} width={35} height={35}/>
+                                        <p className="menu_item_show_one_text">Выход</p>
+                                    </div>
+                                </Link>
+                            </div>
+                        ) : (
+                            <div/>
+                        )}
+                    </div>
+
+
+                </div>
+
+                {/*<Link to="users">
                     <div>
                         <button>Пользователи</button>
                     </div>
@@ -26,7 +77,7 @@ const HeadItem = inject('postsStore', 'songsStore', 'userStore', 'user')(observe
                     }}>
                         <button>Посты</button>
                     </div>
-                </Link>
+                </Link>*/}
 
             </div>
 

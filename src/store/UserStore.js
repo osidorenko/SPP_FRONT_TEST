@@ -14,13 +14,23 @@ class UserStore {
             name: ''
         }
     }
-
+    @observable isMenuOpen = false
     @observable isHaveRules = false
     @observable isPosts = false
     @observable isAddPost = false
     @observable isAddMusic = false
     @observable users
     mainuser = User
+
+    @action
+    menuAction() {
+        this.isMenuOpen = !this.isMenuOpen
+    }
+
+    @action
+    closeMenu() {
+        this.isMenuOpen = false
+    }
 
     constructor() {
         this.getAllUsers()
