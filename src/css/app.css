@@ -357,18 +357,21 @@ input[type=range] {
     height: 50px;
     width: 50px;
 }
-.audio-control-menu1{
+
+.audio-control-menu1 {
     top: 50%;
     left: 50%;
     margin-top: +5px;
     margin-left: -30px;
 }
-.audio-control-menu2{
+
+.audio-control-menu2 {
     top: 50%;
     left: 50%;
     margin-top: +10px;
     margin-left: 0px;
 }
+
 .audio-info {
     display: flex;
 
@@ -610,4 +613,221 @@ input[type=range] {
     background: white;
     border-radius: 15px;
     box-shadow: 0 24px 24px rgba(0, 0, 0, 0.2);
+}
+
+#registration {
+    background: red;
+}
+
+#confirmButton {
+
+}
+
+#registration_email {
+    width: 327px;
+    height: 50px;
+    margin: 0 0 0 60px;
+}
+
+p {
+    font-size: 15px;
+    margin-bottom: 1px;
+
+}
+
+#registration_confirm_input {
+    width: inherit;
+    height: 30px;
+    border-radius: 5px;
+    border: #999999;
+    color: #598a6d;
+}
+
+#registration_name_input {
+    width: inherit;
+    height: 30px;
+    border-radius: 5px;
+    border: #999999;
+    color: #598a6d;
+}
+
+#registration_email_input {
+    width: inherit;
+    height: 30px;
+    border-radius: 5px;
+    border: #999999;
+    color: #598a6d;
+}
+
+#registration_nickname_input {
+    width: inherit;
+    height: 30px;
+    border-radius: 5px;
+    border: #999999;
+    color: #598a6d;
+}
+
+#registration_password_input {
+    width: inherit;
+    height: 30px;
+    border-radius: 5px;
+    border: #999999;
+    color: #598a6d;
+}
+
+#registration {
+    margin: 20px 0 0 60px;
+    width: 327px;
+    height: 50px;
+}
+
+#confirmButton {
+    border: #999999;
+    color: white;
+    border-radius: 5px;
+    background: #00b242;
+    width: inherit;
+    height: inherit;
+}
+
+
+#registrationPage {
+    width: 453px;
+    height: 500px;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    border: solid 1px #ccc;
+    position: absolute;
+    box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.3);
+    background-color: aliceblue;
+}
+
+#RegistrationTag {
+
+    text-align: center;
+    font-size: 25px;
+    font-style: inherit;
+    font-family: Garamond, sans-serif;
+}
+
+.not_found {
+    margin-top: 100px;
+    text-align: center;
+    margin-bottom: 200px;
+}
+
+#email {
+    background: white;
+    position: relative;
+    width: 382px;
+    height: 62px;
+    margin-left: 66px;
+    margin-bottom: 23px;
+}
+
+#email_field {
+    background: #f2f2f2;
+    color: #999999;
+    font-family: Garamond, sans-serif;
+    border: 1px #cccccc;
+    width: inherit;
+    height: inherit;
+    font-size: 20px
+}
+
+#signIn {
+    background: white;
+    position: relative;
+    width: 389px;
+    height: 62px;
+    margin-left: 66px;
+    margin-top: 22px;
+
+}
+
+#sign_in_button {
+    border-radius: 3px;
+    border: 2px #cccccc;
+    width: inherit;
+    height: inherit;
+    background: #00b242;
+    font-size: 24px;
+    font-family: Garamond, sans-serif;
+    color: white;
+}
+
+#LoginPage {
+    width: 493px;
+    height: 365px;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    border: solid 1px #ccc;
+    position: absolute;
+    box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.3);
+    background-color: aliceblue;
+}
+
+#NameTag {
+
+    text-align: center;
+    font-size: 25px;
+    font-style: inherit;
+    font-family: Garamond, sans-serif;
+}
+
+#password {
+
+    position: relative;
+    margin-left: 66px;
+    width: 382px;
+    height: 62px;
+
+}
+
+#password_field {
+    background: #f2f2f2;
+    border: 2px #cccccc;
+    width: inherit;
+    height: inherit;
+    font-size: 20px;
+    color: #999999;
+    font-family: Garamond, sans-serif;
+}
+
+#registration {
+
+    width: 245px;
+    height: 34px;
+    margin-left: 150px;
+    display: flex;
+
+}
+
+#RegisterLink {
+    margin-left: 5px;
+    margin-top: 15px;
+}
+
+#template {
+    text-align: center;
+    color: #999999;
+    margin-top: 4px;
+}
+
+p {
+    font-size: 16px;
+    font-family: Garamond, sans-serif;
+}
+
+#register {
+    font-size: 16px;
+    font-family: Garamond, sans-serif;
+    text-align: end;
+    color: #598a6d;
 }

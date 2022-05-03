@@ -58,7 +58,7 @@ class ClassMusicItem extends React.Component {
                 <div>
                     {this.state.isPhoto ? (
                         <img className="music_item_img"
-                             src={"http://localhost:8100/files/photo/" + this.props.song_data.picture.name} height={40}
+                             src={"http://localhost:8100/app/files/photo/" + this.props.song_data.picture.name} height={40}
                              width={40}/>
                     ) : (
                         <img className="music_item_img" src={def} height={40} width={40}/>

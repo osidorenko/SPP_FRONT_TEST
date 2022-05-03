@@ -106,7 +106,7 @@ class SongsStore {
             headers: myHeaders,
             redirect: 'follow'
         };
-        fetch("http://localhost:8100/songs/data/to/author/" + this.user.id, requestOptions)
+        fetch("http://localhost:8100/app/songs/data/to/author/" + this.user.id, requestOptions)
             .then(response => response.text())
             .then(result => {
                 this.setSongs(JSON.parse(result))
@@ -122,7 +122,7 @@ class SongsStore {
             redirect: 'follow'
         };
 
-        fetch("http://localhost:8100/songs/data/likes/to/author/" + this.mainuser.id, requestOptions)
+        fetch("http://localhost:8100/app/songs/data/likes/to/author/" + this.mainuser.id, requestOptions)
             .then(response => response.text())
             .then(result => {
                 var temp = JSON.parse(result)
@@ -142,7 +142,7 @@ class SongsStore {
             method: 'POST',
             redirect: 'follow'
         };
-        fetch("http://localhost:8100/likes/song/add/" + song_id + "/" + user_id, requestOptions)
+        fetch("http://localhost:8100/app/likes/song/add/" + song_id + "/" + user_id, requestOptions)
             .then(response => response.text())
             .then(result => console.log(result))
             .catch(error => console.log('error', error));
@@ -153,7 +153,7 @@ class SongsStore {
             method: 'POST',
             redirect: 'follow'
         };
-        fetch("http://localhost:8100/likes/song/del/" + song_id + "/" + user_id, requestOptions)
+        fetch("http://localhost:8100/app/likes/song/del/" + song_id + "/" + user_id, requestOptions)
             .then(response => response.text())
             .then(result => console.log(result))
             .catch(error => console.log('error', error));
@@ -165,7 +165,7 @@ class SongsStore {
             method: 'GET',
             redirect: 'follow'
         };
-        fetch("http://localhost:8100/likes/song/to/author/" + this.mainuser.id, requestOptions)
+        fetch("http://localhost:8100/app/likes/song/to/author/" + this.mainuser.id, requestOptions)
             .then(response => response.text())
             .then(result => {
                 var likes = JSON.parse(result)

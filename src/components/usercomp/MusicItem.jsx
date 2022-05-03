@@ -37,7 +37,7 @@ const MusicItem = inject('songsStore', 'musicStore')(observer(({songs_data, song
                 <div>
                     {true ? (
                         <img className="music_item_img"
-                             src={"http://localhost:8100/files/photo/" + song_data.picture.name} height={40}
+                             src={"http://localhost:8100/app/files/photo/" + song_data.picture.name} height={40}
                              width={40}/>
                     ) : (
                         <img className="music_item_img" src={def} height={40} width={40}/>

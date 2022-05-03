@@ -9,7 +9,7 @@ const UserBlockItem = inject('postsStore', 'songsStore', 'userStore', 'user')(ob
             <div className="user_block_item" onClick={() => {
                 userStore.reBuild(puser.id, user)
             }}>
-                <img src={"http://localhost:8100/files/photo/" + puser.picture.name} className="user_avatar"/>
+                <img src={"http://localhost:8100/app/files/photo/" + puser.picture.name} className="user_avatar"/>
                 <div style={{height: "30px"}}></div>
                 <h3 style={{textAlign: "center"}}>{puser.name}</h3>
             </div>

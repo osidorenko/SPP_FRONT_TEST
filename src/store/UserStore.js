@@ -68,7 +68,7 @@ class UserStore {
             redirect: 'follow'
         };
 
-        fetch("http://localhost:8100/users", requestOptions)
+        fetch("http://localhost:8100/app/users", requestOptions)
             .then(response => response.text())
             .then(result => {
                 var users = JSON.parse(result)

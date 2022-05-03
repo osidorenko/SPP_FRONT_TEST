@@ -27,7 +27,7 @@ const CommentEditor = inject('postsStore', 'user')(observer(({postsStore, user, 
                 author: "none"
             }
 
-            xhr.open("POST", "http://localhost:8100/comments");
+            xhr.open("POST", "http://localhost:8100/app/comments");
             xhr.setRequestHeader("Content-Type", "application/json")
             xhr.onload = () => {
                 if (xhr.status == 200) {
@@ -51,7 +51,7 @@ const CommentEditor = inject('postsStore', 'user')(observer(({postsStore, user, 
     return (
         <div className="comment_editor">
             <strong>
-                <img style={{borderRadius: "120px"}} src={"http://localhost:8100/files/photo/" + user.picture.name}
+                <img style={{borderRadius: "120px"}} src={"http://localhost:8100/app/files/photo/" + user.picture.name}
                      width={40} height={40}/>
             </strong>
             <input

@@ -18,7 +18,7 @@ const MusicItemChoose = inject('postEditorStore')(observer(({song_data}) => {
             </div>
             <div>
                 <img className="music_item_img"
-                     src={"http://localhost:8100/files/photo/" + song_data.picture.name} height={40}
+                     src={"http://localhost:8100/app/files/photo/" + song_data.picture.name} height={40}
                      width={40}/>
             </div>
             <div>

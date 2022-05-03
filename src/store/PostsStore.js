@@ -71,7 +71,7 @@ class PostsStore {
             method: 'GET',
             redirect: 'follow'
         };
-        fetch("http://localhost:8100/posts/all", requestOptions)
+        fetch("http://localhost:8100/app/posts/all", requestOptions)
             .then(response => response.text())
             .then(result => {
                     var list = JSON.parse(result)
@@ -97,7 +97,7 @@ class PostsStore {
             headers: myHeaders,
             redirect: 'follow'
         };
-        fetch("http://localhost:8100/posts/to/author/" + this.user.id, requestOptions)
+        fetch("http://localhost:8100/app/posts/to/author/" + this.user.id, requestOptions)
             .then(response => response.text())
             .then(result => {
                 var list = JSON.parse(result)
@@ -127,7 +127,7 @@ class PostsStore {
         if (req === undefined) {
             return
         }
-        request.open("GET", "http://localhost:8100/posts/" + req, true);
+        request.open("GET", "http://localhost:8100/app/posts/" + req, true);
         request.onload = () => {
             console.log(request.status + " " + this.postsToRequestCounter[this.pCurrent])
             if (request.status === 200) {
@@ -333,7 +333,7 @@ class PostsStore {
             method: 'POST',
             redirect: 'follow'
         };
-        fetch("http://localhost:8100/likes/" + post_id + "/" + user_id + "/0", requestOptions)
+        fetch("http://localhost:8100/app/likes/" + post_id + "/" + user_id + "/0", requestOptions)
             .then(response => response.text())
             .then(result => console.log(result))
             .catch(error => console.log('error', error));
@@ -344,7 +344,7 @@ class PostsStore {
             method: 'POST',
             redirect: 'follow'
         };
-        fetch("http://localhost:8100/likes/" + post_id + "/" + user_id + "/1", requestOptions)
+        fetch("http://localhost:8100/app/likes/" + post_id + "/" + user_id + "/1", requestOptions)
             .then(response => response.text())
             .then(result => console.log(result))
             .catch(error => console.log('error', error));
@@ -356,7 +356,7 @@ class PostsStore {
             method: 'POST',
             redirect: 'follow'
         };
-        fetch("http://localhost:8100/likes/" + post_id + "/" + user_id + "", requestOptions)
+        fetch("http://localhost:8100/app/likes/" + post_id + "/" + user_id + "", requestOptions)
             .then(response => response.text())
             .then(result => console.log(result))
             .catch(error => console.log('error', error));

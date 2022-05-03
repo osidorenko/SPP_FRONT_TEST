@@ -1,0 +1,19 @@
+#signIn{
+    background: white;
+    position: relative;
+    width: 389px;
+    height: 62px;
+    margin-left: 66px;
+    margin-top: 22px;
+
+}
+#sign_in_button{
+    border-radius: 3px;
+    border: 2px #cccccc;
+    width:inherit;
+    height: inherit;
+    background: #00b242;
+    font-size: 24px;
+    font-family: Garamond, sans-serif;
+    color: white;
+}

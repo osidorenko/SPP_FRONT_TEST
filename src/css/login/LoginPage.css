@@ -1,0 +1,21 @@
+#LoginPage {
+    width: 493px;
+    height: 365px;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    border: solid 1px #ccc;
+    position: absolute;
+    box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.3);
+    background-color: aliceblue;
+}
+
+#NameTag {
+
+    text-align: center;
+    font-size: 25px;
+    font-style: inherit;
+    font-family: Garamond, sans-serif;
+}

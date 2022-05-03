@@ -5,8 +5,6 @@ import next from "./next.png";
 import prev from "./prev.png";
 import close from "./closeplayer.png";
 import list from "./listplayer.png";
-
-import {render} from "react-dom";
 import musicStore from "../../store/MusicStore"
 import {inject, observer} from "mobx-react";
 import {Link} from "react-router-dom";
@@ -76,7 +74,7 @@ const PlayerItem = inject('musicStore')(observer(({songs_data}) => {
             <div className="audio-info">
                 <img
                     className="artwork"
-                    src={"http://localhost:8100/files/photo/" + musicStore.image}
+                    src={"http://localhost:8100/app/files/photo/" + musicStore.image}
                     alt={`track artwork for ${musicStore.title} by ${musicStore.artist}`
                     }
                 />

@@ -34,7 +34,7 @@ const PlayerItemPost = ({song_data, song}) => {
             setTrackIndex(0);
         }
     }
-    const audioRef = useRef(new Audio("http://localhost:8100/files/music/" + song_data.songName));
+    const audioRef = useRef(new Audio("http://localhost:8100/app/files/music/" + song_data.songName));
     const intervalRef = useRef();
     const isReady = useRef(false);
     const {duration} = audioRef.current;
@@ -53,7 +53,7 @@ const PlayerItemPost = ({song_data, song}) => {
     }
     useEffect(() => {
         audioRef.current.pause();
-        audioRef.current = new Audio("http://localhost:8100/files/music/" + song_data.songName);
+        audioRef.current = new Audio("http://localhost:8100/app/files/music/" + song_data.songName);
         setTrackProgress(audioRef.current.currentTime);
         if (isReady.current) {
             audioRef.current.play();
@@ -89,7 +89,7 @@ const PlayerItemPost = ({song_data, song}) => {
     }, []);
     useEffect(() => {
         audioRef.current.pause();
-        audioRef.current = new Audio("http://localhost:8100/files/music/" + song_data.songName);
+        audioRef.current = new Audio("http://localhost:8100/app/files/music/" + song_data.songName);
         setTrackProgress(audioRef.current.currentTime);
         if (isReady.current) {
             audioRef.current.play();

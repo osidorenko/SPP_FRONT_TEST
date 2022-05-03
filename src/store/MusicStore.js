@@ -138,7 +138,7 @@ class MusicStore {
             this.tracks = tracks1
             console.log("song init")
             console.log(this.tracks.length)
-            this.audioRef = new Audio("http://localhost:8100/files/music/" + tracks1[this.trackIndex].audioSrc);
+            this.audioRef = new Audio("http://localhost:8100/app/files/music/" + tracks1[this.trackIndex].audioSrc);
             this.trackProgress = (this.audioRef.currentTime);
             this.audioRef.play();
             this.isPlaying = (true)
@@ -151,7 +151,7 @@ class MusicStore {
         if (this.audioRef !== undefined) {
             this.audioRef.pause()
         }
-        this.audioRef = new Audio("http://localhost:8100/files/music/" + this.tracks[this.trackIndex].audioSrc);
+        this.audioRef = new Audio("http://localhost:8100/app/files/music/" + this.tracks[this.trackIndex].audioSrc);
         this.trackProgress = (this.audioRef.currentTime);
         this.audioRef.play();
         this.isPlaying = true

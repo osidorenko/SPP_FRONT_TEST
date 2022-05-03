@@ -12,14 +12,20 @@ const SongChoose = inject('postEditorStore', 'songsStore')(observer(({postEditor
                 <h2>Выбор треков</h2>
             </div>
             <div>
+                {songsStore.songsBuffer.length === 0 ? (
+                    <div></div>
+                ) : (
+                    <div>
+                        <h3>Ваши треки</h3>
+                        <MusicListChoose songs_data={songsStore.songs}/>
+                    </div>
+                )}
                 {songsStore.songsBuffer.length === songsStore.songs.length ? (
                     <div>
 
                     </div>
                 ) : (
                     <div>
-                        <h3>Ваши треки</h3>
-                        <MusicListChoose songs_data={songsStore.songs}/>
                         <button onClick={() => songsStore.nextSongs(5)}>следующие</button>
                     </div>
                 )

@@ -1,0 +1,59 @@
+#registration_email{
+    width: 327px;
+    height: 50px;
+    margin:0 0 0 60px;
+}
+p{
+    font-size: 15px;
+    margin-bottom: 1px;
+    color: #00b242;
+}
+#registration_confirm_input{
+    width:inherit;
+    height: 30px;
+    border-radius: 5px;
+    border: #999999;
+    color: #598a6d;
+}
+#registration_name_input{
+    width:inherit;
+    height: 30px;
+    border-radius: 5px;
+    border: #999999;
+    color: #598a6d;
+}
+#registration_email_input{
+    width:inherit;
+    height: 30px;
+    border-radius: 5px;
+    border: #999999;
+    color: #598a6d;
+}
+#registration_nickname_input{
+    width:inherit;
+    height: 30px;
+    border-radius: 5px;
+    border: #999999;
+    color: #598a6d;
+}
+#registration_password_input{
+    width:inherit;
+    height: 30px;
+    border-radius: 5px;
+    border: #999999;
+    color: #598a6d;
+}
+#registration{
+    margin: 20px 0 0 60px;
+    width:327px;
+    height: 50px;
+}
+#confirmButton{
+    border: #999999;
+    color: white;
+    border-radius: 5px;
+    background: #00b242;
+    width:inherit;
+    height: inherit;
+}
+

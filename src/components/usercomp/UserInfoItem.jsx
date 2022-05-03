@@ -10,7 +10,7 @@ const UserInfoItem = ({user}) => {
                 {user.picture === undefined ? (
                     <img style={{borderRadius: "120px"}} src={avatar} width={200} height={200}/>
                 ) : (
-                    <img style={{borderRadius: "120px"}} src={"http://localhost:8100/files/photo/" + user.picture.name}
+                    <img style={{borderRadius: "120px"}} src={"http://localhost:8100/app/files/photo/" + user.picture.name}
                          width={200} height={200}/>
                 )}
 

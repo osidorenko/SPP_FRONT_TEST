@@ -8,6 +8,9 @@ import postEditorStore from "./store/PostEditorStore"
 import musicEditorStore from "./store/MusicEditorStore"
 import userStore from "./store/UserStore"
 import songsStore from "./store/SongsStore"
+import userRegistrationStore from "./store/UserRegistrationStore"
+import userLoginStore from "./store/UserLoginStore"
+
 
 /*export const User = {
     id: 2,
@@ -52,6 +55,8 @@ const stores = {
     postEditorStore,
     musicEditorStore,
     songsStore,
+    userRegistrationStore,
+    userLoginStore,
     user: User
 }
 ReactDOM.render(

@@ -1,0 +1,17 @@
+#email{
+    background: white;
+    position: relative;
+    width: 382px;
+    height: 62px;
+    margin-left: 66px;
+    margin-bottom: 23px;
+}
+#email_field{
+    background: #f2f2f2;
+    color: #999999;
+    font-family: Garamond, sans-serif;
+    border: 1px #cccccc;
+    width: inherit;
+    height: inherit;
+    font-size: 20px
+}

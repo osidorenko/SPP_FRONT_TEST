@@ -38,7 +38,7 @@ class MusicEditorStore {
             body: formdata,
             redirect: 'follow'
         };
-        fetch("http://localhost:8100/upload/photo/", requestOptions)
+        fetch("http://localhost:8100/app/upload/photo/", requestOptions)
             .then(response => response.text())
             .then(result => console.log("Send music PIC"))
             .catch(error => console.log());
@@ -57,7 +57,7 @@ class MusicEditorStore {
             body: formdata,
             redirect: 'follow'
         };
-        fetch("http://localhost:8100/upload/music/", requestOptions)
+        fetch("http://localhost:8100/app/upload/music/", requestOptions)
             .then(response => response.text())
             .then(result => console.log("Send music MP3"))
             .catch(error => console.log());
@@ -84,7 +84,7 @@ class MusicEditorStore {
             alert("Ошибка отправки")
             this.errorSend = 0
         }
-        fetch("http://localhost:8100/songs/data", requestOptions)
+        fetch("http://localhost:8100/app/songs/data", requestOptions)
             .then(response => response.text())
             .then(result => console.log("Send music data"))
             .catch(error => this.errorSend++);

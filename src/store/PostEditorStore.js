@@ -27,7 +27,7 @@ class PostEditorStore {
             redirect: 'follow'
         };
 
-        fetch("http://localhost:8100/upload/photo/", requestOptions)
+        fetch("http://localhost:8100/app/upload/photo/", requestOptions)
             .then(response => response.text())
             .then(() => {
             })
@@ -51,7 +51,7 @@ class PostEditorStore {
             redirect: 'follow'
         };
 
-        fetch("http://localhost:8100/posts", requestOptions)
+        fetch("http://localhost:8100/app/posts", requestOptions)
             .then(response => response.text())
             .then(result => {
                 this.text_post = ''
@@ -112,7 +112,7 @@ class PostEditorStore {
             redirect: 'follow'
         };
 
-        fetch("http://localhost:8100/songs/to/post/" + post_id + "/+" + song_id, requestOptions)
+        fetch("http://localhost:8100/app/songs/to/post/" + post_id + "/+" + song_id, requestOptions)
             .then(response => response.text())
             .then()
             .catch(error => console.log('error', error));

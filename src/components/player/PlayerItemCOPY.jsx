@@ -39,7 +39,7 @@ const PlayerItemCOPY = ({songs_data}) => {
                 )
 
                 setTracks(tracks1)
-                audioRef.current = new Audio("http://localhost:8100/files/music/" + tracks1[0].audioSrc);
+                audioRef.current = new Audio("http://localhost:8100/app/files/music/" + tracks1[0].audioSrc);
                 setTrackProgress(audioRef.current.currentTime);
                 audioRef.current.play();
                 setIsPlaying(true)

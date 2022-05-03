@@ -1,0 +1,31 @@
+#registration {
+
+    width: 245px;
+    height: 34px;
+    margin-left: 150px;
+    display: flex;
+
+}
+
+#RegisterLink {
+    margin-left: 5px;
+    margin-top: 15px;
+}
+
+#template {
+    text-align: center;
+    color: #999999;
+    margin-top: 4px;
+}
+
+p {
+    font-size: 16px;
+    font-family: Garamond, sans-serif;
+}
+
+#register {
+    font-size: 16px;
+    font-family: Garamond, sans-serif;
+    text-align: end;
+    color: #598a6d;
+}

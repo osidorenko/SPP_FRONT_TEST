@@ -22,7 +22,7 @@ const UserItem = inject('userStore', 'user')(observer(({userStore, user, puser})
                         {puser.picture !== undefined ?
                             <a>
                                 <img style={{borderRadius: "120px"}}
-                                     src={"http://localhost:8100/files/photo/" + puser.picture.name}
+                                     src={"http://localhost:8100/app/files/photo/" + puser.picture.name}
                                      alt={""} width={50} height={50}/></a> : 'No?'}</li>
                 </ul>
                 <h3 style={nameStyle}> {puser.name}</h3>
