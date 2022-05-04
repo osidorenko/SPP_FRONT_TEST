@@ -50,14 +50,21 @@ const CommentEditor = inject('postsStore', 'user')(observer(({postsStore, user, 
 
     return (
         <div className="comment_editor">
-            <strong>
-                <img style={{borderRadius: "120px"}} src={"http://localhost:8100/app/files/photo/" + user.picture.name}
-                     width={40} height={40}/>
-            </strong>
-            <input
-                type="text" size="80"
-                value={postsStore.text} onChange={event => postsStore.setText(event.target.value)}/>
-            <button onClick={sendMessage}>SEND</button>
+            {user.name === '' ? (
+                <div></div>
+            ) : (
+                <div>
+                    <strong>
+                        <img style={{borderRadius: "120px"}}
+                             src={"http://localhost:8100/app/files/photo/" + user.picture.name}
+                             width={40} height={40}/>
+                    </strong>
+                    <input
+                        type="text" size="80"
+                        value={postsStore.text} onChange={event => postsStore.setText(event.target.value)}/>
+                    <button onClick={sendMessage}>SEND</button>
+                </div>
+            )}
         </div>
     );
 }))

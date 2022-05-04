@@ -46,6 +46,21 @@ class PostsStore {
         this.getAllList()
     }
 
+    setSearch(pattern, mainuser) {
+        this.mainuser = mainuser
+        this.posts = []
+        this.text = '';
+        this.commentsPost = []
+        this.pCurrent = 0
+        this.postsToRequestCounter = []
+        this.hashmap = new Map()
+        this.socialPost = []
+        this.getBySearchPattern(pattern)
+    }
+
+    getPostsSize() {
+        return this.posts.length
+    }
 
     constructor() {
         //var first = this.getListToUser()
@@ -64,6 +79,28 @@ class PostsStore {
         this.text = value
     }
 
+    getBySearchPattern(pattern) {
+        var postsIds = []
+        var requestOptions = {
+            method: 'GET',
+            redirect: 'follow'
+        };
+        fetch("http://localhost:8100/app/posts/by/pattern/" + pattern, requestOptions)
+            .then(response => response.text())
+            .then(result => {
+                if (result.status === 404) {
+                    return
+                }
+                var list = JSON.parse(result)
+                var i = 0
+                for (i = list.length - 1; i >= 0; i--) {
+                    postsIds.push(list[i][0])
+                }
+                this.setPostsIDs(postsIds)
+                this.getNextPosts(postsIds[0])
+            })
+            .catch(error => console.log('not find'));
+    }
 
     getAllList() {
         var postsIds = []

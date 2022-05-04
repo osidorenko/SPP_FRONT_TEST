@@ -23,12 +23,31 @@ class SongsStore {
         this.songs = []
         this.songsBuffer = []
         this.countView = 0
+        this.lovesongs = []
         this.getAllUserLike()
         if (mainuser.name === user.name) {
             this.loadLikeMusic()
         }
         this.loadAll()
+    }
 
+    getSongsSize() {
+        return this.songsBuffer.length
+    }
+
+    setSearch(user, mainuser, pattern) {
+        this.mainuser = mainuser
+        this.hashmap = new Map()
+        this.user = user
+        this.songs = []
+        this.songsBuffer = []
+        this.countView = 0
+        this.lovesongs = []
+        this.getAllUserLike()
+        if (mainuser.name === user.name) {
+            this.loadLikeMusic()
+        }
+        this.getSongsByPattern(pattern)
     }
 
     @action
@@ -88,10 +107,10 @@ class SongsStore {
     getSongsAll() {
         var mapa = new Map();
         this.songsBuffer.map(song => {
-            mapa.set(song.id,song)
+            mapa.set(song.id, song)
         })
         this.lovesongs.map(song => {
-            mapa.set(song.id,song)
+            mapa.set(song.id, song)
         })
         return mapa
     }
@@ -160,6 +179,24 @@ class SongsStore {
     }
 
 
+    getSongsByPattern(pattern) {
+        var requestOptions = {
+            method: 'GET',
+            redirect: 'follow'
+        };
+        fetch("http://localhost:8100/app/songs/by/pattern/" + pattern, requestOptions)
+            .then(response => response.text())
+            .then(result => {
+                if (result.status === 404) {
+                    return
+                }
+                this.setSongs(JSON.parse(result))
+                this.nextSongs(3)
+            })
+            .catch(error => console.log('not found'));
+
+    }
+
     getAllUserLike() {
         var requestOptions = {
             method: 'GET',
@@ -170,7 +207,7 @@ class SongsStore {
             .then(result => {
                 var likes = JSON.parse(result)
                 likes.map(like => {
-                        console.log("like for user" + this.mainuser.id + " songid " + like.songData)
+
                         this.hashmap.set(like.songData, 1)
                     }
                 )

@@ -10,6 +10,8 @@ import userStore from "./store/UserStore"
 import songsStore from "./store/SongsStore"
 import userRegistrationStore from "./store/UserRegistrationStore"
 import userLoginStore from "./store/UserLoginStore"
+import searchStore from "./store/SearchStore"
+import mainUserStore from "./store/MainUserStore"
 
 
 /*export const User = {
@@ -30,16 +32,15 @@ export const User = {
     }
 }
 */
-
-export const User = {
-    id: 6,
-    name: "KALEO",
+export var User = {
+    id: 0,
+    name: "",
     picture: {
-        id: 999,
-        name: "kaleoava.png"
+        id: 0,
+        name: ""
     }
-}
-/*export const User = {
+}/*
+export const User = {
     id: 4,
     name: "olegsidor538",
     picture: {
@@ -57,6 +58,8 @@ const stores = {
     songsStore,
     userRegistrationStore,
     userLoginStore,
+    searchStore,
+    mainUserStore,
     user: User
 }
 ReactDOM.render(

@@ -1,6 +1,7 @@
 import {action, computed, observable, runInAction} from "mobx";
 import {useState} from "react";
 import us, {User} from "../index"
+import mainUserStore from "../store/MainUserStore"
 import songsStore from "../store/SongsStore"
 import postsStore from "../store/PostsStore"
 
@@ -20,7 +21,7 @@ class UserStore {
     @observable isAddPost = false
     @observable isAddMusic = false
     @observable users
-    mainuser = User
+    mainuser = mainUserStore.user
 
     @action
     menuAction() {

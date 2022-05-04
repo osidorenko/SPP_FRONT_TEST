@@ -6,6 +6,9 @@ class UserRegistrationStore {
     @observable nickname = ''
     @observable password = ''
     @observable confirm_password = ''
+    @observable fil
+    @observable fileC
+    @observable isChose = false
 
     constructor() {
 
@@ -31,7 +34,6 @@ class UserRegistrationStore {
     setConfirm = (value) => {
         this.confirm_password = value
     }
-
 
 
 }

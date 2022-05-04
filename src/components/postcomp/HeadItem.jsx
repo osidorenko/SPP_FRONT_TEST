@@ -6,8 +6,10 @@ import users from "../png/users.png"
 import home from "../png/home.png"
 import news from "../png/news.png"
 import logout from "../png/logout.png"
+import search from "../png/search.png"
+import searchStore from "../../store/SearchStore"
 
-const HeadItem = inject('postsStore', 'songsStore', 'userStore', 'user')(observer(({postsStore, songsStore, userStore, user}) => {
+const HeadItem = inject('searchStore', 'postsStore', 'songsStore', 'userStore', 'user')(observer(({postsStore, songsStore, userStore, user, searchStore}) => {
 
     return (
         <ul className="header_main">
@@ -42,9 +44,20 @@ const HeadItem = inject('postsStore', 'songsStore', 'userStore', 'user')(observe
                                         <p className="menu_item_show_one_text">Посты</p>
                                     </div>
                                 </Link>
+                                <Link to="search">
+                                    <div className="menu_item_show_one" onClick={() => {
+                                        searchStore.chooseSearchPage()
+                                        userStore.closeMenu()
+
+                                    }}>
+                                        <img src={search} width={35} height={35}/>
+                                        <p className="menu_item_show_one_text">Поиск</p>
+                                    </div>
+                                </Link>
                                 <Link to="login">
                                     <div className="menu_item_show_one" onClick={() => {
                                         userStore.closeMenu()
+
                                     }}>
                                         <img src={logout} width={35} height={35}/>
                                         <p className="menu_item_show_one_text">Выход</p>

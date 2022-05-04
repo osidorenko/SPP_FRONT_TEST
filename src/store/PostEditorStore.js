@@ -10,6 +10,7 @@ class PostEditorStore {
     @observable songsInPost = new Map()
     @observable songsInList = []
 
+
     constructor() {
     }
 
@@ -59,10 +60,13 @@ class PostEditorStore {
                 this.fileC = undefined
                 this.fil = undefined
                 this.isChoseMusic = false
+
                 var post_id = result
                 this.songsInList.map(song => {
                     this.sendSongsToPost(post_id, song.id)
                 })
+                this.songsInPost = new Map()
+                this.songsInList = []
             })
             .catch(error => console.log('error', error));
         this.sendData()

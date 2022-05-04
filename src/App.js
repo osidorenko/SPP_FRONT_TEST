@@ -4,13 +4,10 @@ import UserPage from "./components/UserPage";
 import UsersBlockPage from "./components/UsersBlockPage";
 import {Link, Route, BrowserRouter as Router, Switch} from 'react-router-dom';
 import PostsPage from "./components/PostsPage";
-import notfound from "./components/png/notfound.png"
 import NewsPage from "./components/NewsPage";
 import SongChoose from "./components/editorscomp/SongChoose";
 import NowPlayItem from "./components/player/NowPlayItem";
 import Login_Page_Box from "./components/login/Login_Page_Box";
-import RegistrationPage from "./components/registration/RegistrationPage";
-
 
 var user = {
     id: 2,
@@ -45,13 +42,11 @@ function App() {
                         <Login_Page_Box/>
                     </Route>
                     <Route path="/registration">
-                        <RegistrationPage/>
+
                     </Route>
-                    {/*<Route path="/">
-                        <div className="not_found">
-                            <img src={notfound}/>
-                        </div>
-                    </Route>*/}
+                    <Route path="/">
+                        <UsersBlockPage/>
+                    </Route>
 
                 </Switch>
             </Router>

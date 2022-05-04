@@ -6,7 +6,7 @@ import {Link} from "react-router-dom";
 import userLoginStore from "../../store/UserLoginStore"
 import {inject, observer} from "mobx-react";
 
-const Login_Page_Box = inject('userLoginStore', 'user')(observer(({userLoginStore, user}) => {
+const Login_Page_Box = inject('mainUserStore', 'userLoginStore', 'userStore', 'user')(observer(({userLoginStore, user, userStore, mainUserStore}) => {
 
     return (
         <LoginPage>
@@ -24,9 +24,16 @@ const Login_Page_Box = inject('userLoginStore', 'user')(observer(({userLoginStor
                            userLoginStore.setPass(event.target.value)
                        }}/>
             </div>
-            <div id={"signIn"}>
-                <input type={"button"} id="sign_in_button" value={"LOGIN"}/>
-            </div>
+            <Link to="user">
+                <div id={"signIn"}>
+                    <input type={"button"} id="sign_in_button" value={"LOGIN"} onClick={
+                        () => {
+                            userLoginStore.LoginIn()
+                        }
+                    }/>
+                </div>
+            </Link>
+
             <div>
                 <Link to="registration">
                     <div id={"template"}>

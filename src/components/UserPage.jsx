@@ -14,81 +14,91 @@ import {inject, observer} from "mobx-react";
 
 const UserPage = inject('postsStore', 'songsStore', 'userStore', 'user')(observer(({postsStore, songsStore, userStore, user}) => {
         return (
+
             <div>
                 <HeadItem/>
-                <UserInfoItem user={userStore.user}/>
-                <button onClick={() => {
-                    userStore.setIsPosts(true)
-                    userStore.setIsAddMusic(false, user)
-                }}>Посты
-                </button>
-                <button onClick={() => {
-                    userStore.setIsPosts(false)
-                    userStore.setIsAddPost(false, user)
-                }}>Музыка
-                </button>
-                {userStore.isPosts ? (
+                {user.name === '' ? (
                     <div>
-                        {userStore.isAddPost ? (
-                            <div>
-                                <button onClick={() => {
-                                    userStore.setIsAddPost(false, user)
-                                }}>Отмена
-                                </button>
-                                <PostsEditor/>
-                            </div>
-
-                        ) : (
-                            <div>
-                                {userStore.isHaveRules ? (
-                                    <button onClick={() => {
-                                        userStore.setIsAddPost(true, user)
-                                    }}>Добавить пост
-                                    </button>
-                                ) : (
-                                    <div/>
-                                )}
-                                <PostsPage/>
-                            </div>
-                        )
-                        }
+                        <h1>Вы не вошли в профиль</h1>
                     </div>
                 ) : (
                     <div>
-                        {userStore.isAddMusic ? (
+
+                        <UserInfoItem user={userStore.user}/>
+                        <button onClick={() => {
+                            userStore.setIsPosts(true)
+                            userStore.setIsAddMusic(false, user)
+                        }}>Посты
+                        </button>
+                        <button onClick={() => {
+                            userStore.setIsPosts(false)
+                            userStore.setIsAddPost(false, user)
+                        }}>Музыка
+                        </button>
+                        {userStore.isPosts ? (
                             <div>
-                                <button onClick={() => {
-                                    userStore.setIsAddMusic(false, user)
-                                }}>Отмена
-                                </button>
-                                <MusicEditor/>
+                                {userStore.isAddPost ? (
+                                    <div>
+                                        <button onClick={() => {
+                                            userStore.setIsAddPost(false, user)
+                                        }}>Отмена
+                                        </button>
+                                        <PostsEditor/>
+                                    </div>
+
+                                ) : (
+                                    <div>
+                                        {userStore.isHaveRules ? (
+                                            <button onClick={() => {
+                                                userStore.setIsAddPost(true, user)
+                                            }}>Добавить пост
+                                            </button>
+                                        ) : (
+                                            <div/>
+                                        )}
+                                        <PostsPage/>
+                                    </div>
+                                )
+                                }
                             </div>
                         ) : (
                             <div>
-                                {userStore.isHaveRules ? (
-                                    <button onClick={() => {
-                                        userStore.setIsAddMusic(true, user)
-                                    }}>Добавить трек
-                                    </button>
+                                {userStore.isAddMusic ? (
+                                    <div>
+                                        <button onClick={() => {
+                                            userStore.setIsAddMusic(false, user)
+                                        }}>Отмена
+                                        </button>
+                                        <MusicEditor/>
+                                    </div>
                                 ) : (
-                                    <div/>
-                                )}
+                                    <div>
+                                        {userStore.isHaveRules ? (
+                                            <button onClick={() => {
+                                                userStore.setIsAddMusic(true, user)
+                                            }}>Добавить трек
+                                            </button>
+                                        ) : (
+                                            <div/>
+                                        )}
 
-                                <MusicUserItem isLove={false} title="Популярные треки"/>
-                                {userStore.isHaveRules ? (
-                                    <MusicUserItem isLove={true} title="Любимые треки" />
-                                ) : (
-                                    <div/>
+                                        <MusicUserItem isLove={false} title="Популярные треки"/>
+                                        {userStore.isHaveRules ? (
+                                            <MusicUserItem isLove={true} title="Любимые треки"/>
+                                        ) : (
+                                            <div/>
+                                        )
+                                        }
+                                    </div>
                                 )
                                 }
                             </div>
                         )
                         }
+                        <div className="empty"/>
+                        <PlayerItem/>
                     </div>
-                )
-                }
-                <div className="empty"/>
-                <PlayerItem/>
+                )}
             </div>
         )
     }
